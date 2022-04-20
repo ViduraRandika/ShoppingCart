@@ -22,13 +22,21 @@ namespace LogicLayer.AuthLogic
 
         public string AuthenticateUser(string email, string password)
         {
-            var user = _auth.Authenticate(email, password);
+            var user = _auth.Authenticate(email);
 
-            if (user == null || user.Password != password)
+            
+
+            var passwordHash = new PasswordHash();
+            var isVerifiedPassword = passwordHash.VerifyPassword(user.Password, password);
+
+
+            // return user.Password;
+            
+            if (user == null || !isVerifiedPassword)
             {
                 return null;
             }
-
+            
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenKey = Encoding.ASCII.GetBytes(key);
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -43,7 +51,7 @@ namespace LogicLayer.AuthLogic
                         new SymmetricSecurityKey(tokenKey),
                         SecurityAlgorithms.HmacSha256Signature)
             };
-
+            
             var ftoken = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(ftoken);
         }

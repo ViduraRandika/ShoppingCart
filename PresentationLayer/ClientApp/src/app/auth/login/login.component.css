@@ -13,6 +13,10 @@ height: calc(100% - 73px);
 	padding-left: 2.5rem; 
 	padding-right: 2.5rem;
 }
+
+input.invalid {
+	border-color: red;
+}
 @media (max-width: 450px) {
 .h-custom {
 height: 100%;

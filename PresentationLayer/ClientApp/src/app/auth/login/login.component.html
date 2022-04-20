@@ -5,20 +5,24 @@
 				<img src="assets/images/login_bg.svg" alt="login_bacgkround" class="img-fluid">
 			</div>
 			<div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-				<form>
+				<form novalidate #form="ngForm" (submit)="onSubmit(form)">
 					<div class="text-center text-lg-start mb-4 pt-2">
 						<h1 class="mb-3">Login</h1>
 					</div>
 
 					<!-- Email input -->
 					<div class="form-outline mb-4">
-						<input type="email" id="form3Example3" class="form-control form-control-lg" placeholder="Enter a valid email address" />
+						<input type="email" id="email" name="email" #email="ngModel" [(ngModel)]="service.formData.email" 
+							class="form-control form-control-lg" placeholder="Enter a valid email address" required
+							[class.invalid]="email.invalid && email.touched"/>
 						<!-- <label class="form-label" for="form3Example3">Email address</label> -->
 					</div>
 
 					<!-- Password input -->
 					<div class="form-outline mb-3">
-						<input type="password" id="form3Example4" class="form-control form-control-lg" placeholder="Enter password" />
+						<input type="password" id="password" name="password" #password="ngModel" [(ngModel)]="service.formData.password" 
+						class="form-control form-control-lg" placeholder="Enter password" required 
+						maxlength="20" minlength="8" [class.invalid]="password.invalid && password.touched"/>
 						<!-- <label class="form-label" for="form3Example4">Password</label> -->
 					</div>
 
@@ -33,7 +37,7 @@
 					</div>
 
 					<div class="text-center text-lg-start mt-4 pt-2">
-						<button type="submit" class="btn btn-primary btn-lg login-btn">Login</button>
+						<button type="submit" class="btn btn-primary btn-lg login-btn" [disabled]="form.invalid" >Login</button>
 						<p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="/register" class="link-danger">Register</a></p>
 					</div>
 				</form>

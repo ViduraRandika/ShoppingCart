@@ -9,7 +9,7 @@ namespace DataAccessLayer.DataContext
         {
             AppConfiguration appConfig = new AppConfiguration();
             var optionsBuilder = new DbContextOptionsBuilder<DatabaseContext>();
-            optionsBuilder.UseSqlServer(appConfig.sqlConnectionString);
+            optionsBuilder.UseSqlServer(appConfig.SqlConnectionString);
             return new DatabaseContext(optionsBuilder.Options);
         }
     }

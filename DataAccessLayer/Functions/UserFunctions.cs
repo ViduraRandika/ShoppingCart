@@ -15,7 +15,7 @@ namespace DataAccessLayer.Functions
     {
       //Create a new customer
 
-      public async Task<int> CreateCustomer(string customerName, string customerAddress, int customerPhoneNumber, string email, string password, int authLevelId)
+      public async Task<int> CreateCustomer(string customerName, string customerAddress, string customerPhoneNumber, string email, string password, int authLevelId)
       {
           try
           {
@@ -23,26 +23,22 @@ namespace DataAccessLayer.Functions
               {
                   Email = email,
                   Password = password,
-                  AuthLevelId = authLevelId
-              };
-
-              var newCustomer = new Customer
-              {
-                  CustomerAddress = customerAddress,
-                  CustomerName = customerName,
-                  CustomerPhoneNumber = customerPhoneNumber,
-                  User = newUser
+                  AuthLevelId = authLevelId,
+                  UserAddress = customerAddress,
+                  UserFullName = customerName,
+                  UserPhoneNumber = customerPhoneNumber
               };
 
               var context = new DatabaseContext(DatabaseContext.ops.dbOptions);
 
-              await context.Customers.AddAsync(newCustomer);
+              await context.Users.AddAsync(newUser);
               await context.SaveChangesAsync();
 
               return 200;
           }
-          catch (Exception )
+          catch (Exception exception)
           {
+              Console.WriteLine(exception);
               return 409;
           }
       }

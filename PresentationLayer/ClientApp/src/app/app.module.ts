@@ -12,6 +12,11 @@ import { RegisterComponent } from './auth/register/register.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { ChangePasswordComponent } from './auth/change-password/change-password.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CartComponent } from './cart/cart.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,12 +25,16 @@ import { ChangePasswordComponent } from './auth/change-password/change-password.
     HomeComponent,
     RegisterComponent,
     ForgotPasswordComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
     FontAwesomeModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

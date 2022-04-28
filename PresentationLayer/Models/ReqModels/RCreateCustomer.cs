@@ -12,7 +12,7 @@ namespace PresentationLayer.Models.ReqModels
 
         [Required]
         // [Phone]
-        public int CustomerPhoneNumber { get; set; }
+        public string CustomerPhoneNumber { get; set; }
 
         [Required]
         public string Email { get; set; }

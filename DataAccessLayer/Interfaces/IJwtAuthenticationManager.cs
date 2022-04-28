@@ -5,6 +5,6 @@ namespace DataAccessLayer.Interfaces
 {
     public interface IJwtAuthenticationManager
     {
-        User Authenticate(string email, string password);
+        User Authenticate(string email);
     }
 }

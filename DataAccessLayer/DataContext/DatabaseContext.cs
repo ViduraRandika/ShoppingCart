@@ -9,17 +9,17 @@ namespace DataAccessLayer.DataContext
         {
             public OptionsBuild()
             {
-                settings = new AppConfiguration();
-                optionsBuilder = new DbContextOptionsBuilder<DatabaseContext>();
-                optionsBuilder.UseSqlServer(settings.sqlConnectionString);
-                dbOptions = optionsBuilder.Options;
+                Settings = new AppConfiguration();
+                OptionsBuilder = new DbContextOptionsBuilder<DatabaseContext>();
+                OptionsBuilder.UseSqlServer(Settings.SqlConnectionString);
+                dbOptions = OptionsBuilder.Options;
             }
 
-            public DbContextOptionsBuilder<DatabaseContext> optionsBuilder { get; set; }
+            public DbContextOptionsBuilder<DatabaseContext> OptionsBuilder { get; set; }
 
             public DbContextOptions<DatabaseContext> dbOptions { get; set; }
 
-            private AppConfiguration settings { get; set; }
+            private AppConfiguration Settings { get; set; }
         }
 
         public static OptionsBuild ops = new OptionsBuild();
@@ -30,7 +30,6 @@ namespace DataAccessLayer.DataContext
         }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<Customer> Customers { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Cart> Carts { get; set; }

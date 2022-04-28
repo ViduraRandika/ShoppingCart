@@ -7,6 +7,7 @@ using System.Net;
 using System.Threading.Tasks;
 using DataAccessLayer.Entities;
 using LogicLayer.UserLogic;
+using Microsoft.AspNetCore.Authorization;
 using PresentationLayer.Models.ReqModels;
 
 namespace PresentationLayer.API
@@ -18,6 +19,7 @@ namespace PresentationLayer.API
         private readonly UserLogic userLogic = new UserLogic();
 
 
+        [AllowAnonymous]
         [Route("add")]
         [HttpPost]
 
@@ -39,10 +41,11 @@ namespace PresentationLayer.API
 
             return BadRequest();
         }
+        
 
         [Route("all")]
         [HttpGet]
-
+        [Authorize(Roles = "customer")]
         public async Task<List<User>> GetAllUsers()
         {
             List<User> users = await userLogic.GetAllUsers();

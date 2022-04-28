@@ -12,8 +12,8 @@ namespace DataAccessLayer.DataContext
             configBuilder.AddJsonFile(path, false);
             var root = configBuilder.Build();
             var appSetting = root.GetSection("ConnectionStrings:DefaultConnection");
-            sqlConnectionString = appSetting.Value;
+            SqlConnectionString = appSetting.Value;
         }
-        public string sqlConnectionString { get; set; }
+        public string SqlConnectionString { get; set; }
     }
 }

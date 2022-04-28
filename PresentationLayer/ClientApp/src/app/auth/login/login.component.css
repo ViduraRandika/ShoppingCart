@@ -17,6 +17,7 @@ height: calc(100% - 73px);
 input.invalid {
 	border-color: red;
 }
+
 @media (max-width: 450px) {
 .h-custom {
 height: 100%;

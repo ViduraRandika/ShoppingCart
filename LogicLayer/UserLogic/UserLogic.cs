@@ -19,7 +19,7 @@ namespace LogicLayer.UserLogic
         private readonly IUser _user = new UserFunctions();
 
         // add a new user
-        public async Task<int> CreateNewUser(string customerName, string customerAddress, int customerPhoneNumber, string email, string password)
+        public async Task<int> CreateNewUser(string customerName, string customerAddress, string customerPhoneNumber, string email, string password)
         {
             try
             {

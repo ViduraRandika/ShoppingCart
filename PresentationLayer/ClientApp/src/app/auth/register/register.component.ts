@@ -15,9 +15,8 @@ import Validation from 'src/app/shared/auth/register/validation.model';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(public service:RegisterService, private cdr:ChangeDetectorRef, private fb: FormBuilder, public router:Router) {}
+  constructor(public service:RegisterService, private fb: FormBuilder, public router:Router) {}
 
-  data='initial'
   registerForm = this.fb.group({
     customerName: [''],
     customerAddress: [''],

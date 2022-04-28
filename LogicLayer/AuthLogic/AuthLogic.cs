@@ -6,6 +6,7 @@ using System.Text;
 using DataAccessLayer.Functions;
 using DataAccessLayer.Interfaces;
 using LogicLayer.Interfaces;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace LogicLayer.AuthLogic
@@ -14,11 +15,11 @@ namespace LogicLayer.AuthLogic
     {
         private readonly IJwtAuthenticationManager _auth = new JwtAuthenticationManager();
 
-        private readonly string key;
+        private readonly string _key;
 
         public AuthLogic(string key)
         {
-            this.key = key;
+            this._key = key;
         }
 
         public string AuthenticateUser(string email, string password)
@@ -40,7 +41,7 @@ namespace LogicLayer.AuthLogic
             }
             
             var tokenHandler = new JwtSecurityTokenHandler();
-            var tokenKey = Encoding.ASCII.GetBytes(key);
+            var tokenKey = Encoding.ASCII.GetBytes(_key);
 
             var authLevel = user.AuthLevelId switch
             {
@@ -49,25 +50,24 @@ namespace LogicLayer.AuthLogic
                 _ => ""
             };
 
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
+            JwtSecurityToken token = new JwtSecurityToken(
+                claims: new[]
                 {
                     new Claim(ClaimTypes.Email, email),
                     new Claim(ClaimTypes.Name, user.UserFullName),
                     new Claim(ClaimTypes.StreetAddress, user.UserAddress),
                     new Claim(ClaimTypes.MobilePhone, user.UserPhoneNumber),
                     new Claim(ClaimTypes.Role, authLevel)
-                }),
-                Expires = DateTime.UtcNow.AddHours(1),
-                SigningCredentials =
-                    new SigningCredentials(
-                        new SymmetricSecurityKey(tokenKey),
-                        SecurityAlgorithms.HmacSha256Signature)
-            };
+                },
+                expires: DateTime.UtcNow.AddHours(3),
+                signingCredentials: new SigningCredentials(
+                    key: new SymmetricSecurityKey(tokenKey),
+                    algorithm: SecurityAlgorithms.HmacSha256
+                )
+            );
 
-            var ftoken = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(ftoken);
+            string ftoken = tokenHandler.WriteToken(token);
+            return ftoken;
         }
     }
 }

@@ -41,11 +41,11 @@ namespace PresentationLayer.API
 
             return BadRequest();
         }
+        
 
-        [AllowAnonymous]
         [Route("all")]
         [HttpGet]
-
+        [Authorize(Roles = "customer")]
         public async Task<List<User>> GetAllUsers()
         {
             List<User> users = await userLogic.GetAllUsers();

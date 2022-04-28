@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginService } from 'src/app/shared/auth/login/login.service';
 
 @Component({
@@ -10,21 +11,41 @@ import { LoginService } from 'src/app/shared/auth/login/login.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public service:LoginService) { }
+  constructor(public service:LoginService, private fb: FormBuilder, public router:Router) { }
+
+  loginForm = this.fb.group({
+      email: [''],
+      password: ['']
+  });
 
   ngOnInit(): void {
+    this.loginForm = new FormGroup(
+      {
+        email: new FormControl("",[
+          Validators.required,
+          Validators.email,
+        ]),
+
+        password: new FormControl("",[
+          Validators.required,
+        ]),
+      }
+    )
   }
 
-  onSubmit(form:NgForm){
-    this.service.postLoginCredentials().subscribe(
-      res=>{
-        console.log(res)
-      },err=>{
-        if(err.status == 401){
-          console.log("invalid email or password")
-        }
-      }
-    );
+  get email(){
+    return this.loginForm.get('email')
+  }
+
+  get password(){
+    return this.loginForm.get('password')
+  }
+
+  onSubmit(formData:any){
+    this.service.postLoginCredentials().subscribe((data: {}) => {
+      window.alert("Logged in successfully")
+      this.router.navigate(['/'])
+    })
   }
 
 }

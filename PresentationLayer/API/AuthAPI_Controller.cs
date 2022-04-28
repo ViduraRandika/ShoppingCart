@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using LogicLayer.AuthLogic;
 using LogicLayer.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using PresentationLayer.Models;
 using PresentationLayer.Models.ReqModels;
 
@@ -23,7 +24,7 @@ namespace PresentationLayer.API
         }
         
 
-        [HttpPost("login")]
+        [HttpPost("login"),AllowAnonymous]
 
         public IActionResult Authenticate([FromBody] RCredentials credentials)
         {

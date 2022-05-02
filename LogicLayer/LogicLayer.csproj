@@ -12,4 +12,8 @@
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="AdminLogic\" />
+  </ItemGroup>
+
 </Project>

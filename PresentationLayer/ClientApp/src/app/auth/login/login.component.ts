@@ -42,10 +42,16 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(formData:any){
-    this.service.postLoginCredentials().subscribe((data: {}) => {
+    this.service.postLoginCredentials(formData).subscribe(
+    (data: string) => {
+      localStorage.setItem("jwt",data)
       window.alert("Logged in successfully")
       this.router.navigate(['/'])
-    })
+    },
+    (error: string) => {
+      window.alert(error)
+    }
+    )
   }
 
 }

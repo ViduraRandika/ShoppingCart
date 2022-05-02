@@ -16,6 +16,19 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CartComponent } from './cart/cart.component';
+import { AddProductComponent } from './admin/add-product/add-product.component';
+import { CreateCategoryComponent } from './admin/create-category/create-category.component';
+import { JwtHelperService, JwtModule, JwtModuleOptions } from '@auth0/angular-jwt';
+
+const JWT_Module_Options: JwtModuleOptions = {
+    config: {
+        tokenGetter: tokenGetter
+    }
+};
+
+export function tokenGetter() {
+  return localStorage.getItem("jwt");
+}
 
 @NgModule({
   declarations: [
@@ -26,7 +39,9 @@ import { CartComponent } from './cart/cart.component';
     RegisterComponent,
     ForgotPasswordComponent,
     ChangePasswordComponent,
-    CartComponent
+    CartComponent,
+    AddProductComponent,
+    CreateCategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -34,9 +49,10 @@ import { CartComponent } from './cart/cart.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    JwtModule.forRoot(JWT_Module_Options)
   ],
-  providers: [],
+  providers: [JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

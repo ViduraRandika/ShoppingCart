@@ -1,9 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using DataAccessLayer.Entities;
 using LogicLayer.UserLogic;
@@ -45,7 +41,7 @@ namespace PresentationLayer.API
 
         [Route("all")]
         [HttpGet]
-        [Authorize(Roles = "customer")]
+        [Authorize(Roles = "admin")]
         public async Task<List<User>> GetAllUsers()
         {
             List<User> users = await userLogic.GetAllUsers();

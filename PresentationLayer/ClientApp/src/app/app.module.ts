@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './header/navbar/navbar.component';
@@ -19,6 +19,35 @@ import { CartComponent } from './cart/cart.component';
 import { AddProductComponent } from './admin/add-product/add-product.component';
 import { CreateCategoryComponent } from './admin/create-category/create-category.component';
 import { JwtHelperService, JwtModule, JwtModuleOptions } from '@auth0/angular-jwt';
+import { PerfectScrollbarConfigInterface, PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { IconModule, IconSetService } from '@coreui/icons-angular';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { 
+  AvatarModule,
+  BadgeModule,
+  BreadcrumbModule,
+  ButtonGroupModule,
+  ButtonModule,
+  CardModule,
+  DropdownModule,
+  FooterModule,
+  FormModule,
+  GridModule,
+  HeaderModule,
+  ListGroupModule,
+  NavModule,
+  ProgressModule,
+  SharedModule,
+  SidebarModule,
+  TabsModule,
+  UtilitiesModule,
+} from '@coreui/angular';
+
+import {
+  DefaultFooterComponent,
+  DefaultHeaderComponent,
+  DefaultLayoutComponent,
+} from './admin/containers';
 
 const JWT_Module_Options: JwtModuleOptions = {
     config: {
@@ -30,8 +59,21 @@ export function tokenGetter() {
   return localStorage.getItem("jwt");
 }
 
+// ---------------- admin panel ------------------
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true,
+};
+
+const APP_CONTAINERS = [
+  DefaultFooterComponent,
+  DefaultHeaderComponent,
+  DefaultLayoutComponent,
+];
+
+
 @NgModule({
   declarations: [
+    ...APP_CONTAINERS,
     AppComponent,
     NavbarComponent,
     LoginComponent,
@@ -50,9 +92,42 @@ export function tokenGetter() {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    JwtModule.forRoot(JWT_Module_Options)
+    JwtModule.forRoot(JWT_Module_Options),
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    AvatarModule,
+    BreadcrumbModule,
+    FooterModule,
+    DropdownModule,
+    GridModule,
+    HeaderModule,
+    SidebarModule,
+    IconModule,
+    PerfectScrollbarModule,
+    NavModule,
+    ButtonModule,
+    FormModule,
+    UtilitiesModule,
+    ButtonGroupModule,
+    ReactiveFormsModule,
+    SidebarModule,
+    SharedModule,
+    TabsModule,
+    ListGroupModule,
+    ProgressModule,
+    BadgeModule,
+    ListGroupModule,
+    CardModule,
   ],
-  providers: [JwtHelperService],
+  providers: [
+    JwtHelperService,
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
+    },
+    IconSetService,
+    Title
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

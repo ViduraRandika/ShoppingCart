@@ -11,7 +11,12 @@ export class NavbarComponent implements OnInit {
   faCoffee = faCoffee;
   constructor() { }
 
+  isLoggedin = false;
+  
   ngOnInit(): void {
+    if(localStorage.getItem("jwt") != null){
+      this.isLoggedin = true;
+    }
   }
 
 }

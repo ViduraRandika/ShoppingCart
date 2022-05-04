@@ -26,10 +26,8 @@ export class LoginService {
     if(error.error instanceof ErrorEvent){
       errorMessage = error.error.message;
     }else{
-      errorMessage = `Something went wront. Please try again.`
+      errorMessage = `Incorrect email or password.`
     }
-
-    window.alert(errorMessage);
 
     return throwError(() => {
       return errorMessage;

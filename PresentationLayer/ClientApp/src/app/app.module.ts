@@ -15,9 +15,6 @@ import { ChangePasswordComponent } from './auth/change-password/change-password.
 import { HttpClientModule } from '@angular/common/http';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CartComponent } from './cart/cart.component';
-import { AddProductComponent } from './admin/add-product/add-product.component';
-import { CreateCategoryComponent } from './admin/create-category/create-category.component';
 import { JwtHelperService, JwtModule, JwtModuleOptions } from '@auth0/angular-jwt';
 import { PerfectScrollbarConfigInterface, PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { IconModule, IconSetService } from '@coreui/icons-angular';
@@ -48,6 +45,7 @@ import {
   DefaultHeaderComponent,
   DefaultLayoutComponent,
 } from './admin/containers';
+import { CartComponent } from './cart/cart.component';
 
 const JWT_Module_Options: JwtModuleOptions = {
     config: {
@@ -82,8 +80,6 @@ const APP_CONTAINERS = [
     ForgotPasswordComponent,
     ChangePasswordComponent,
     CartComponent,
-    AddProductComponent,
-    CreateCategoryComponent
   ],
   imports: [
     BrowserModule,

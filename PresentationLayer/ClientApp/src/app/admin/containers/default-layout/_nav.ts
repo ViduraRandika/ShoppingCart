@@ -26,6 +26,40 @@ export const navItems: INavData[] = [
     iconComponent: { name: 'cil-pencil' }
   },
   {
+    name: 'Manage',
+    title: true
+  },
+  {
+    name: 'Category',
+    url: '/admin/category',
+    iconComponent: { name: 'cil-puzzle' },
+    children: [
+      {
+        name: 'View Categories',
+        url: '/admin/category/view'
+      },
+      {
+        name: 'Add Category',
+        url: '/admin/category/add'
+      }
+    ]
+  },
+  {
+    name: 'Product',
+    url: '/admin/product',
+    iconComponent: { name: 'cil-puzzle' },
+    children: [
+      {
+        name: 'View Products',
+        url: '/admin/product/view'
+      },
+      {
+        name: 'Add Product',
+        url: '/admin/product/add'
+      }
+    ]
+  },
+  {
     name: 'Components',
     title: true
   },

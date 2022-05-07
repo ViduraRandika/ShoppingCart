@@ -1,12 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using DataAccessLayer.Entities;
 using LogicLayer.AdminLogic;
-using LogicLayer.UserLogic;
+using LogicLayer.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using PresentationLayer.Models.ReqModels;
 
@@ -32,6 +28,16 @@ namespace PresentationLayer.API
                 400 => StatusCode(400, "Something went wrong"),
                 _ => BadRequest()
             };
+        }
+
+        [Route("view-categories")]
+        [HttpGet]
+        public async Task<List<CategoryViewModel>> ViewCategories()
+        {
+
+            var categories= await _adminLogic.ViewCategories();
+
+            return categories;
         }
 
 

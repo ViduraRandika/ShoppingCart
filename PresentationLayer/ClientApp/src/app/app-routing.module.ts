@@ -5,13 +5,11 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { ChangePasswordComponent } from './auth/change-password/change-password.component';
-import { CartComponent } from './cart/cart.component';
-import { CreateCategoryComponent } from './admin/create-category/create-category.component';
 import { RouteGuardService } from './shared/auth/route-guard.service';
 import { DefaultLayoutComponent } from './admin/containers';
 import { Page404Component } from './admin/views/pages/page404/page404.component';
 import { Page500Component } from './admin/views/pages/page500/page500.component';
-
+import { CartComponent } from './cart/cart.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -20,14 +18,14 @@ const routes: Routes = [
   { path: 'forgot-password', component:ForgotPasswordComponent},
   { path: 'change-password', component:ChangePasswordComponent},
   { path: 'shopping-cart', component:CartComponent},
-  { 
-    path: 'admin/create-category', 
-    component:CreateCategoryComponent,
-    canActivate: [RouteGuardService],
-    data: {
-      expectedRole: 'admin'
-    }
-  },
+  // { 
+  //   path: 'admin/create-category', 
+  //   component:CreateCategoryComponent,
+  //   canActivate: [RouteGuardService],
+  //   data: {
+  //     expectedRole: 'admin'
+  //   }
+  // },
   {
     path: 'admin',
     redirectTo: 'admin/dashboard',
@@ -44,6 +42,16 @@ const routes: Routes = [
         path:'dashboard',
         loadChildren: () =>
           import('./admin/views/dashboard/dashboard.module').then((m) => m.DashboardModule)
+      },
+      {
+        path:'category',
+        loadChildren: () =>
+          import('./admin/views/category/category.module').then((m) => m.CategoryModule)
+      },
+      {
+        path:'product',
+        loadChildren: () =>
+          import('./admin/views/product/product.module').then((m) => m.ProductModule)
       },
       {
         path: 'theme',

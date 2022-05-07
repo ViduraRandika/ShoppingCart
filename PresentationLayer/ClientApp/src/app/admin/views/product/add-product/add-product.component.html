@@ -1,0 +1,34 @@
+<c-row ngPreserveWhitespaces>
+	<c-col xs="12">
+		<c-card class="mb-4">
+			<c-card-header>
+				<strong>Add Product</strong>
+			</c-card-header>
+			<c-card-body>
+				<app-docs-example href="forms/form-control">
+					<form cForm>
+						<div class="mb-3">
+							<label cLabel for="productNameInput">Product Name</label>
+							<input cFormControl id="productNameInput" placeholder="Ex: Charger" type="text"/>
+						</div>
+						<div class="mb-3">
+							<label cLabel for="descriptiopnInput">Description</label>
+              				<textarea cFormControl id="descriptiopnInput" rows="3"></textarea>
+						</div>
+						<div class="mb-3">
+							<label cLabel for="priceInput">Price (In Rupees)</label>
+							<input cFormControl id="priceInput" placeholder="Ex: 1450" type="number"/>
+						</div>
+						<div class="mb-3">
+							<label cLabel for="productImageInput">Product Image</label>
+            				<input cFormControl id="productImageInput" type="file" />
+						</div>
+						<div class="mb-3">
+							<button type="submit" class="btn btn-primary normal">SAVE</button>
+						</div>
+					</form>
+				</app-docs-example>
+			</c-card-body>
+		</c-card>
+	</c-col>
+</c-row>

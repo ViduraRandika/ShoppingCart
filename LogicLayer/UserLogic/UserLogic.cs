@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer.Entities;
 using DataAccessLayer.Functions;
 using DataAccessLayer.Interfaces;
 using LogicLayer.AuthLogic;
-using LogicLayer.Interfaces;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Migrations.Operations;
 
 namespace LogicLayer.UserLogic
 {

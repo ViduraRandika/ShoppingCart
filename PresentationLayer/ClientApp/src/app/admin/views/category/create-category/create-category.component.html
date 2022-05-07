@@ -1,0 +1,28 @@
+<c-row ngPreserveWhitespaces>
+	<c-col xs="12">
+		<c-card class="mb-4">
+			<c-card-header>
+				<strong>Create Category</strong>
+			</c-card-header>
+			<c-card-body>
+				<app-docs-example href="forms/form-control">
+					<form cForm [formGroup]="createCategoryForm" (submit)="onSubmit(createCategoryForm.value)">
+						<div class="mb-3">
+							<label cLabel for="categoryName">Category Name</label>
+							<input cFormControl id="categoryName" formControlName="categoryName" placeholder="Ex: Mobile Phones" type="text"/>
+
+							<div *ngIf="categoryName && (categoryName.dirty || categoryName.touched)"  class="alert">
+								<div *ngIf="categoryName.errors?.['required']">
+									Category name is required.
+								</div>
+							</div>
+						</div>
+						<div class="mb-3">
+							<button type="submit" class="btn btn-primary normal" [disabled]="createCategoryForm.invalid">SAVE</button>
+						</div>
+					</form>
+				</app-docs-example>
+			</c-card-body>
+		</c-card>
+	</c-col>
+</c-row>

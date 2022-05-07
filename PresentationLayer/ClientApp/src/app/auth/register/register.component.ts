@@ -2,8 +2,6 @@ import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { catchError, of } from 'rxjs';
-import { Register } from 'src/app/shared/auth/register/register.model';
 import { RegisterService } from 'src/app/shared/auth/register/register.service';
 import Validation from 'src/app/shared/auth/register/validation.model';
 

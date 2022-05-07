@@ -1,10 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using DataAccessLayer.Entities;
 
 namespace DataAccessLayer.Interfaces
 {
     public interface IAdmin
     {
         Task<int> CreateCategory(string categoryName);
+
+        Task<List<Category>> ViewCategories();
 
         Task<int> AddNewProduct(string productName, string description, float price, byte[] productImage,
             int categoryId);

@@ -6,7 +6,6 @@ using System.Text;
 using DataAccessLayer.Functions;
 using DataAccessLayer.Interfaces;
 using LogicLayer.Interfaces;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace LogicLayer.AuthLogic

@@ -5,8 +5,6 @@ using System.Threading.Tasks;
 using DataAccessLayer.DataContext;
 using DataAccessLayer.Entities;
 using DataAccessLayer.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Functions

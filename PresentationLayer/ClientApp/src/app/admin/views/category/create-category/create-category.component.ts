@@ -2,7 +2,6 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/shared/admin/admin.service';
-import Validation from 'src/app/shared/auth/register/validation.model';
 
 @Component({
   selector: 'app-create-category',

@@ -8,7 +8,7 @@ import { iconSubset } from './icons/icon-subset';
   selector: 'body',
   template: '<router-outlet></router-outlet>',
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'ClientApp';
 
   constructor(
@@ -21,12 +21,12 @@ export class AppComponent implements OnInit {
     iconSetService.icons = { ...iconSubset };
   }
 
-  ngOnInit(): void {
-    this.router.events.subscribe((evt) => {
-      if (!(evt instanceof NavigationEnd)) {
-        return;
-      }
-    });
-  }
+  // ngOnInit(): void {
+  //   this.router.events.subscribe((evt) => {
+  //     if (!(evt instanceof NavigationEnd)) {
+  //       return;
+  //     }
+  //   });
+  // }
   
 }

@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DataAccessLayer.DataContext;
 using DataAccessLayer.Entities;
 using DataAccessLayer.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Functions
 {
@@ -56,6 +58,17 @@ namespace DataAccessLayer.Functions
                 Console.WriteLine(e);
                 return 400;
             }
+        }
+
+        public async Task<List<Category>> ViewCategories()
+        {
+            List<Category> categories = new List<Category>();
+            using (var context = new DatabaseContext(DatabaseContext.ops.dbOptions))
+            {
+                categories = await context.Categories.ToListAsync();
+            }
+
+            return categories;
         }
     }
 }

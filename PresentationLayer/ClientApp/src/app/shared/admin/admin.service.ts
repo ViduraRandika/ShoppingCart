@@ -27,10 +27,6 @@ export class AdminService {
   }
 
   getCategories(){
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-
     return this.http
       .get('/api/admin/view-categories', {responseType: 'json'})
       .pipe(
@@ -54,6 +50,16 @@ export class AdminService {
     .pipe(catchError(
         this.handleError
     ))
+  }
+
+  getProducts(){
+    return this.http
+      .get('/api/admin/view-products', {responseType: 'json'})
+      .pipe(
+        catchError(
+          this.handleError
+        )
+      )
   }
 
   handleError(error: any){

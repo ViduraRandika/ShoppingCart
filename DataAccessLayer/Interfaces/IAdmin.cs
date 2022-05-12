@@ -12,5 +12,7 @@ namespace DataAccessLayer.Interfaces
 
         Task<int> AddNewProduct(string productName, string description, float price, string productImagePath,
             int categoryId);
+
+        Task<List<Product>> ViewProducts();
     }
 }

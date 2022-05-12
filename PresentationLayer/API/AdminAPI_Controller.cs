@@ -101,5 +101,15 @@ namespace PresentationLayer.API
                 return StatusCode(500, $"Internal server error: {ex}");
             }
         }
+
+        [Route("view-products")]
+        [HttpGet]
+        public async Task<List<ProductViewModel>> ViewProducts()
+        {
+
+            var produts = await _adminLogic.ViewProducts();
+
+            return produts;
+        }
     }
 }

@@ -60,5 +60,32 @@ namespace LogicLayer.AdminLogic
                 throw;
             }
         }
+
+        public async Task<List<ProductViewModel>> ViewProducts()
+        {
+            var products = await _admin.ViewProducts();
+            List<ProductViewModel> productList = new List<ProductViewModel>();
+            if (products.Count > 0)
+            {
+                // return products;
+                foreach (var product in products)
+                {
+                    ProductViewModel currentProduct = new ProductViewModel()
+                    {
+                        ProductId = product.ProductId,
+                        ProductName = product.ProductName,
+                        ProductImagePath = product.ProductImagePath,
+                        Price = product.Price,
+                        Description = product.Description,
+                        CategoryName = product.Category.CategoryName
+                    };
+                
+                    productList.Add(currentProduct);
+                }
+                return productList;
+            }
+
+            return null;
+        }
     }
 }

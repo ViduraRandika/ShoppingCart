@@ -76,7 +76,7 @@ namespace DataAccessLayer.Functions
             List<Product> products = new List<Product>();
             using (var context = new DatabaseContext(DatabaseContext.ops.dbOptions))
             {
-                products = await context.Products.ToListAsync();
+                products = await context.Products.Include(c=>c.Category).ToListAsync();
             }
 
             return products;

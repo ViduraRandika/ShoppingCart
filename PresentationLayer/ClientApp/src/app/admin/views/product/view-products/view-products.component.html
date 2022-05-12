@@ -11,26 +11,10 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>Product 1</td>
-						<td>100</td>
-						<td>
-							<button type="button"class="btn btn-link normal me-1" >More</button>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td>Product 2</td>
-						<td>200</td>
-						<td>
-							<button type="button"class="btn btn-link normal me-1" >More</button>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td>Product 3</td>
-						<td>300</td>
+					<tr *ngFor="let e of data;">
+						<th scope="row">{{e['productId']}}</th>
+						<td>{{e['productName']}}</td>
+						<td>{{e['price']}}</td>
 						<td>
 							<button type="button"class="btn btn-link normal me-1" >More</button>
 						</td>

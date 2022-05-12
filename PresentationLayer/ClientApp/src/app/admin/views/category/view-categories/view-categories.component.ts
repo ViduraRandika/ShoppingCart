@@ -15,11 +15,6 @@ export class ViewCategoriesComponent implements OnInit {
     this.service.getCategories().subscribe(
       (data: any) => {
         this.data = data;
-
-        for(var i=0; i<data.length; i++){
-          console.log(data[i]['categoryId'])
-          console.log(data[i]['categoryName'])
-        }
       }
     )
 

@@ -40,6 +40,22 @@ export class AdminService {
       )
   }
 
+  postAddProduct(formData:any){
+    return this.http
+      .post('/api/admin/add-product',formData,{responseType: 'text'})
+      .pipe(catchError(
+        this.handleError
+      ))
+  }
+
+  uploadImg(data:any){
+    return this.http
+    .post('/api/admin/uploadProductImage', data)
+    .pipe(catchError(
+        this.handleError
+    ))
+  }
+
   handleError(error: any){
     let errorMessage = '';
     console.log(error)

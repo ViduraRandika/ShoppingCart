@@ -8,6 +8,6 @@ namespace PresentationLayer.Models.ReqModels
         [Required] public string ProductName { get; set; }
         [Required] public string Description { get; set; }
         [Required] public float Price { get; set; }
-        [Required] public byte[] ProductImage { get; set; }
+        [Required] public string ProductImagePath { get; set; }
     }
 }

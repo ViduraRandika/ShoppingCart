@@ -6,25 +6,32 @@
 			</c-card-header>
 			<c-card-body>
 				<app-docs-example href="forms/form-control">
-					<form cForm>
+					<form cForm [formGroup]="addProductForm" (submit)="submit(addProductForm.value)">
 						<div class="mb-3">
-							<label cLabel for="productNameInput">Product Name</label>
-							<input cFormControl id="productNameInput" placeholder="Ex: Charger" type="text"/>
+							<label cLabel for="productName">Product Name</label>
+							<input cFormControl id="productName" formControlName="productName" placeholder="Ex: Charger" type="text"/>
 						</div>
 						<div class="mb-3">
-							<label cLabel for="descriptiopnInput">Description</label>
-              				<textarea cFormControl id="descriptiopnInput" rows="3"></textarea>
+							<label cLabel for="descriptiopn">Description</label>
+              				<textarea cFormControl id="descriptiopn" formControlName="description" rows="3"></textarea>
 						</div>
 						<div class="mb-3">
-							<label cLabel for="priceInput">Price (In Rupees)</label>
-							<input cFormControl id="priceInput" placeholder="Ex: 1450" type="number"/>
+							<label cLabel for="selectCategory">Select Category</label>
+							<select id="selectCategory" formControlName="selectCategory" aria-label="Category Select" cSelect>
+								<option disabled selected>Open this select menu</option>
+								<option *ngFor="let e of data;" value="{{e['categoryId']}}">{{e['categoryName']}}</option>
+							</select>
 						</div>
 						<div class="mb-3">
-							<label cLabel for="productImageInput">Product Image</label>
-            				<input cFormControl id="productImageInput" type="file" />
+							<label cLabel for="price">Price (In Rupees)</label>
+							<input cFormControl id="price" formControlName="price" placeholder="Ex: 1450" type="number"/>
 						</div>
 						<div class="mb-3">
-							<button type="submit" class="btn btn-primary normal">SAVE</button>
+							<label cLabel for="productImagePath">Product Image</label>
+            				<input cFormControl id="productImagePath" formControlName="productImagePath" #file type="file" accept="image/*" (change)="uploadFile(file.files)"/>
+						</div>
+						<div class="mb-3">
+							<button type="submit" class="btn btn-primary normal" [disabled]="addProductForm.invalid">SAVE</button>
 						</div>
 					</form>
 				</app-docs-example>

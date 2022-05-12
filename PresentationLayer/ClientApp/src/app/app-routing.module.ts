@@ -10,8 +10,10 @@ import { DefaultLayoutComponent } from './admin/containers';
 import { Page404Component } from './admin/views/pages/page404/page404.component';
 import { Page500Component } from './admin/views/pages/page500/page500.component';
 import { CartComponent } from './cart/cart.component';
+import { TestComponent } from './test/test.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'test', component: TestComponent },
   { path: 'home', component: HomeComponent },
   { path: 'login', component:LoginComponent },
   { path: 'register', component:RegisterComponent},

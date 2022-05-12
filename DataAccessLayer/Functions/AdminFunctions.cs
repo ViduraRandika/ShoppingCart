@@ -33,7 +33,7 @@ namespace DataAccessLayer.Functions
             }
         }
 
-        public async Task<int> AddNewProduct(string productName, string description, float price, byte[] productImage, int categoryId)
+        public async Task<int> AddNewProduct(string productName, string description, float price, string productImagePath, int categoryId)
         {
             try
             {
@@ -42,7 +42,7 @@ namespace DataAccessLayer.Functions
                     ProductName = productName,
                     Description = description,
                     Price = price,
-                    ProductImage = productImage,
+                    ProductImagePath = productImagePath,
                     CategoryId = categoryId
                 };
 
@@ -69,6 +69,17 @@ namespace DataAccessLayer.Functions
             }
 
             return categories;
+        }
+
+        public async Task<List<Product>> ViewProducts()
+        {
+            List<Product> products = new List<Product>();
+            using (var context = new DatabaseContext(DatabaseContext.ops.dbOptions))
+            {
+                products = await context.Products.ToListAsync();
+            }
+
+            return products;
         }
     }
 }

@@ -1,9 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.IO;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using LogicLayer.AdminLogic;
 using LogicLayer.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using PresentationLayer.Models.ReqModels;
 
 namespace PresentationLayer.API
@@ -12,6 +17,8 @@ namespace PresentationLayer.API
     [ApiController]
     public class AdminAPI_Controller : ControllerBase
     {
+
+
         private readonly AdminLogic _adminLogic = new AdminLogic();
 
         [Route("create-category")]
@@ -43,12 +50,12 @@ namespace PresentationLayer.API
 
         [Route("add-product")]
         [HttpPost]
-        [Authorize(Roles = "admin")]
+        // [Authorize(Roles = "admin")]
 
         public async Task<IActionResult> AddNewProduct([FromBody] RCreateProduct product)
         {
             if (!ModelState.IsValid) return BadRequest();
-            var result = await _adminLogic.CreateNewProduct(product.ProductName, product.Description, product.Price, product.ProductImage, product.CategoryId);
+            var result = await _adminLogic.CreateNewProduct(product.ProductName, product.Description, product.Price, product.ProductImagePath, product.CategoryId);
 
             return result switch
             {
@@ -56,7 +63,43 @@ namespace PresentationLayer.API
                 400 => StatusCode(400, "Something went wrong"),
                 _ => BadRequest()
             };
-            
+
+        }
+
+        [Route("uploadProductImage")]
+        [HttpPost]
+        public async Task<IActionResult> Upload()
+        {
+            try
+            {
+                var file = Request.Form.Files[0];
+                var folderName = Path.Combine("Resources", "Products");
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                if (file.Length > 0)
+                {
+
+                    FileInfo fi = new FileInfo(file.FileName);
+
+                    var ext = fi.Extension;
+                    var uniqueFileName = $@"{DateTime.Now.Ticks}"+ext;
+                    
+                    var fullPath = Path.Combine(pathToSave, uniqueFileName);
+                    var dbPath = Path.Combine(folderName, uniqueFileName);
+                    await using (var stream = new FileStream(fullPath, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+                    return Ok(new {path = dbPath, status = 200});
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex}");
+            }
         }
     }
 }

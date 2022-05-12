@@ -46,6 +46,8 @@ import {
   DefaultLayoutComponent,
 } from './admin/containers';
 import { CartComponent } from './cart/cart.component';
+import { TestComponent } from './test/test.component';
+import { ProductListComponent } from './user/shop/product-list/product-list.component';
 
 const JWT_Module_Options: JwtModuleOptions = {
     config: {
@@ -80,6 +82,8 @@ const APP_CONTAINERS = [
     ForgotPasswordComponent,
     ChangePasswordComponent,
     CartComponent,
+    TestComponent,
+    ProductListComponent,
   ],
   imports: [
     BrowserModule,

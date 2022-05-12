@@ -48,12 +48,11 @@ namespace LogicLayer.AdminLogic
             return null;
         }
 
-        public async Task<int> CreateNewProduct(string productName, string description, float price,
-            byte[] productImage, int categoryId)
+        public async Task<int> CreateNewProduct(string productName, string description, float price,string productImagePath, int categoryId)
         {
             try
             {
-                return await _admin.AddNewProduct(productName, description, price, productImage, categoryId);
+                return await _admin.AddNewProduct(productName, description, price, productImagePath, categoryId);
             }
             catch (Exception e)
             {

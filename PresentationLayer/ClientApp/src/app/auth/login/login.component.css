@@ -23,6 +23,10 @@ input.invalid {
 	color: red;
 }
 
+.lbl-font-size{
+	font-size: small;
+}
+
 @media (max-width: 450px) {
 .h-custom {
 height: 100%;

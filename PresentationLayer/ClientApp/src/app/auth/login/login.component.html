@@ -12,8 +12,8 @@
 
 					<!-- Email input -->
 					<div class="form-floating mb-4">
+						<label class="lbl-font-size" for="email">Email</label>
 						<input type="email" id="email" formControlName="email" class="form-control form-control-lg" placeholder="Email" required/>
-						<label for="email">Password</label>
 
 						<div *ngIf="email && (email.dirty || email.touched)"  class="alert">
 							<div *ngIf="email.errors?.['required']">
@@ -28,8 +28,8 @@
 
 					<!-- Password input -->
 					<div class="form-floating mb-3">
+						<label class="lbl-font-size" for="password">Password</label>
 						<input type="password" id="password" formControlName="password" class="form-control form-control-lg" placeholder="Password" required/>
-						<label for="password">Password</label>
 
 						<div *ngIf="password && (password.dirty || password.touched)"  class="alert">
 							<div *ngIf="password.errors?.['required']">

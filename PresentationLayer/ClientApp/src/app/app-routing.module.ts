@@ -6,20 +6,25 @@ import { RegisterComponent } from './auth/register/register.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { ChangePasswordComponent } from './auth/change-password/change-password.component';
 import { RouteGuardService } from './shared/auth/route-guard.service';
-import { DefaultLayoutComponent } from './admin/containers';
-import { Page404Component } from './admin/views/pages/page404/page404.component';
-import { Page500Component } from './admin/views/pages/page500/page500.component';
-import { CartComponent } from './cart/cart.component';
 import { TestComponent } from './test/test.component';
+import { ProductListComponent } from './user/shop/product-list/product-list.component';
+import { AdminLayoutComponent } from './_layout/admin-layout/admin-layout.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'test', component: TestComponent },
-  { path: 'home', component: HomeComponent },
+  { 
+    path: 'home', component: HomeComponent,
+    canActivate: [RouteGuardService],
+    data: {
+      expectedRole: "any"
+    }
+  },
   { path: 'login', component:LoginComponent },
   { path: 'register', component:RegisterComponent},
   { path: 'forgot-password', component:ForgotPasswordComponent},
   { path: 'change-password', component:ChangePasswordComponent},
-  { path: 'shopping-cart', component:CartComponent},
+  { path: 'shop/product-list', component:ProductListComponent},
+  { path: 'temp', component:AdminLayoutComponent},
   // { 
   //   path: 'admin/create-category', 
   //   component:CreateCategoryComponent,
@@ -33,96 +38,20 @@ const routes: Routes = [
     redirectTo: 'admin/dashboard',
     pathMatch: 'full'
   },
-  {
-    path: 'admin',
-    component: DefaultLayoutComponent,
-    data: {
-      title: 'Admin Dashboard'
-    },
-    children: [
-      {
-        path:'dashboard',
-        loadChildren: () =>
-          import('./admin/views/dashboard/dashboard.module').then((m) => m.DashboardModule)
-      },
-      {
-        path:'category',
-        loadChildren: () =>
-          import('./admin/views/category/category.module').then((m) => m.CategoryModule)
-      },
-      {
-        path:'product',
-        loadChildren: () =>
-          import('./admin/views/product/product.module').then((m) => m.ProductModule)
-      },
-      {
-        path: 'theme',
-        loadChildren: () =>
-          import('./admin/views/theme/theme.module').then((m) => m.ThemeModule)
-      },
-      {
-        path: 'base',
-        loadChildren: () =>
-          import('./admin/views/base/base.module').then((m) => m.BaseModule)
-      },
-      {
-        path: 'buttons',
-        loadChildren: () =>
-          import('./admin/views/buttons/buttons.module').then((m) => m.ButtonsModule)
-      },
-      {
-        path: 'forms',
-        loadChildren: () =>
-          import('./admin/views/forms/forms.module').then((m) => m.CoreUIFormsModule)
-      },
-      {
-        path: 'charts',
-        loadChildren: () =>
-          import('./admin/views/charts/charts.module').then((m) => m.ChartsModule)
-      },
-      {
-        path: 'icons',
-        loadChildren: () =>
-          import('./admin/views/icons/icons.module').then((m) => m.IconsModule)
-      },
-      {
-        path: 'notifications',
-        loadChildren: () =>
-          import('./admin/views/notifications/notifications.module').then((m) => m.NotificationsModule)
-      },
-      {
-        path: 'widgets',
-        loadChildren: () =>
-          import('./admin/views/widgets/widgets.module').then((m) => m.WidgetsModule)
-      },
-      {
-        path: 'pages',
-        loadChildren: () =>
-          import('./admin/views/pages/pages.module').then((m) => m.PagesModule)
-      },
-    ]
-  },
-  {
-    path: '404',
-    component: Page404Component,
-    data: {
-      title: 'Page 404'
-    }
-  },
-  {
-    path: '500',
-    component: Page500Component,
-    data: {
-      title: 'Page 500'
-    }
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-    data: {
-      title: 'Login Page'
-    }
-  },
+  // {
+  //   path: 'admin',
+  //   component: DefaultLayoutComponent,
+  //   data: {
+  //     title: 'Admin Dashboard'
+  //   },
+  //   children: [
+  //     {
+  //       path:'dashboard',
+  //       loadChildren: () =>
+  //         import('./admin/views/dashboard/dashboard.module').then((m) => m.DashboardModule)
+  //     },
+  //   ]
+  // },
   {
     path: 'register',
     component: RegisterComponent,

@@ -16,38 +16,14 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtHelperService, JwtModule, JwtModuleOptions } from '@auth0/angular-jwt';
-import { PerfectScrollbarConfigInterface, PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
-import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { 
-  AvatarModule,
-  BadgeModule,
-  BreadcrumbModule,
-  ButtonGroupModule,
-  ButtonModule,
-  CardModule,
-  DropdownModule,
-  FooterModule,
-  FormModule,
-  GridModule,
-  HeaderModule,
-  ListGroupModule,
-  NavModule,
-  ProgressModule,
-  SharedModule,
-  SidebarModule,
-  TabsModule,
-  UtilitiesModule,
-} from '@coreui/angular';
 
-import {
-  DefaultFooterComponent,
-  DefaultHeaderComponent,
-  DefaultLayoutComponent,
-} from './admin/containers';
-import { CartComponent } from './cart/cart.component';
 import { TestComponent } from './test/test.component';
 import { ProductListComponent } from './user/shop/product-list/product-list.component';
+import { HeaderComponent } from './user/shop/header/header.component';
+import { UserLayoutComponent } from './_layout/user-layout/user-layout.component';
+import { AdminLayoutComponent } from './_layout/admin-layout/admin-layout.component';
+import { APP_BASE_HREF } from '@angular/common';
 
 const JWT_Module_Options: JwtModuleOptions = {
     config: {
@@ -59,21 +35,9 @@ export function tokenGetter() {
   return localStorage.getItem("jwt");
 }
 
-// ---------------- admin panel ------------------
-const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true,
-};
-
-const APP_CONTAINERS = [
-  DefaultFooterComponent,
-  DefaultHeaderComponent,
-  DefaultLayoutComponent,
-];
-
 
 @NgModule({
   declarations: [
-    ...APP_CONTAINERS,
     AppComponent,
     NavbarComponent,
     LoginComponent,
@@ -81,9 +45,11 @@ const APP_CONTAINERS = [
     RegisterComponent,
     ForgotPasswordComponent,
     ChangePasswordComponent,
-    CartComponent,
     TestComponent,
     ProductListComponent,
+    HeaderComponent,
+    UserLayoutComponent,
+    AdminLayoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -95,38 +61,12 @@ const APP_CONTAINERS = [
     JwtModule.forRoot(JWT_Module_Options),
     BrowserAnimationsModule,
     AppRoutingModule,
-    AvatarModule,
-    BreadcrumbModule,
-    FooterModule,
-    DropdownModule,
-    GridModule,
-    HeaderModule,
-    SidebarModule,
-    IconModule,
-    PerfectScrollbarModule,
-    NavModule,
-    ButtonModule,
-    FormModule,
-    UtilitiesModule,
-    ButtonGroupModule,
-    ReactiveFormsModule,
-    SidebarModule,
-    SharedModule,
-    TabsModule,
-    ListGroupModule,
-    ProgressModule,
-    BadgeModule,
-    ListGroupModule,
-    CardModule,
+    ReactiveFormsModule
   ],
   providers: [
     JwtHelperService,
-    {
-      provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
-    },
-    IconSetService,
-    Title
+    Title,
+    {provide: APP_BASE_HREF, useValue: '/'}
   ],
   bootstrap: [AppComponent]
 })

@@ -11,8 +11,8 @@
 					</div>
 					<!-- Name input -->
 					<div class="form-floating mb-3">
+						<label class="lbl-font-size" for="customerName">Name</label>
 						<input type="text" id="customerName" formControlName="customerName" class="form-control form-control-lg" placeholder="Name" required/>
-						<label for="customerName">Name</label>
 
 						<div *ngIf="customerName && (customerName.dirty || customerName.touched)"  class="alert">
 							<div *ngIf="customerName.errors?.['required']">
@@ -27,8 +27,8 @@
 					
 					<!-- Email input -->
 					<div class="form-floating mb-3">
+						<label class="lbl-font-size" for="email">Email</label>
 						<input type="email" id="email" formControlName="email" class="form-control form-control-lg" placeholder="Email" required/>
-						<label for="email">Email</label>
 
 						<div *ngIf="email && (email.dirty || email.touched)"  class="alert">
 							<div *ngIf="email.errors?.['required']">
@@ -43,8 +43,8 @@
 
 					<!-- Address input -->
 					<div class="form-floating mb-3">
+						<label class="lbl-font-size" for="customerAddress">Address</label>
 						<input type="text" id="customerAddress" formControlName="customerAddress" class="form-control form-control-lg" placeholder="Address" required/>
-						<label for="customerAddress">Address</label>
 
 						<div *ngIf="customerAddress && (customerAddress.dirty || customerAddress.touched)"  class="alert">
 							<div *ngIf="customerAddress.errors?.['required']">
@@ -55,8 +55,8 @@
 					
 					<!-- Phone number input -->
 					<div class="form-floating mb-3">
+						<label class="lbl-font-size" for="customerPhoneNumber">Phone Number</label>
 						<input type="tel" id="customerPhoneNumber" formControlName="customerPhoneNumber" class="form-control form-control-lg" maxlength="10" placeholder="Phone Number Ex:0777777777" pattern="[0-9]{10}" required/>
-						<label for="customerPhoneNumber">Phone Number</label>
 
 						<div *ngIf="customerPhoneNumber && (customerPhoneNumber.dirty || customerPhoneNumber.touched)"  class="alert">
 							<div *ngIf="customerPhoneNumber.errors?.['required']">
@@ -71,8 +71,8 @@
 
 					<!-- Password input -->
 					<div class="form-floating mb-3">
+						<label class="lbl-font-size" for="password">Password</label>
 						<input type="password" id="password" formControlName="password" class="form-control form-control-lg" placeholder="Password" required/>
-						<label for="password">Password</label>
 
 						<div *ngIf="password && (password.dirty || password.touched)" class="alert">
 							<div *ngIf="password.errors?.['required']">
@@ -98,8 +98,8 @@
 
 					<!-- Confirm Password input -->
 					<div class="form-floating mb-3">
+						<label class="lbl-font-size" for="confirmPassword">Confirm Password</label>
 						<input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control form-control-lg" placeholder="Confirm Password" required/>
-						<label for="confirmPassword">Confirm Password</label>
 
 						<div *ngIf="confirmPassword && (confirmPassword.dirty || confirmPassword.touched)" class="alert">
 							<div *ngIf="confirmPassword.errors?.['required']">

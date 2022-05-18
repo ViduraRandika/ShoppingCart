@@ -3,7 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
-  selector: 'my-app',
+  selector: 'app-root',
   templateUrl: './app.component.html'
 })
 export class AppComponent {

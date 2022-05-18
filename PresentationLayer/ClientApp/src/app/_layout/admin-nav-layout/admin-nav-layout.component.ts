@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-admin-layout',
-  templateUrl: './admin-layout.component.html',
-  styleUrls: ['./admin-layout.component.css']
+  selector: 'app-admin-nav-layout',
+  templateUrl: './admin-nav-layout.component.html',
+  styleUrls: ['./admin-nav-layout.component.css']
 })
-export class AdminLayoutComponent implements OnInit {
+export class AdminNavLayoutComponent implements OnInit {
 
   constructor() { }
 
@@ -13,7 +13,6 @@ export class AdminLayoutComponent implements OnInit {
     this.loadScript("assets/plugins/jquery/jquery.min.js");
     this.loadCustomScript()
     this.loadScript("assets/plugins/bootstrap/js/bootstrap.bundle.min.js");
-    this.loadScript("assets/dist/js/adminlte.js");
   }
 
   public loadScript(url:string) {
@@ -29,5 +28,4 @@ export class AdminLayoutComponent implements OnInit {
     node.type = 'text/javascript';
     document.getElementsByTagName('body')[0].appendChild(node);
   }
-
 }

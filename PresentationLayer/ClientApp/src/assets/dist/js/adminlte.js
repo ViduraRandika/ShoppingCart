@@ -1676,257 +1676,257 @@
     return IFrame._jQueryInterface;
   };
 
-  // /**
-  //  * --------------------------------------------
-  //  * AdminLTE Layout.js
-  //  * License MIT
-  //  * --------------------------------------------
-  //  */
-  // /**
-  //  * Constants
-  //  * ====================================================
-  //  */
+  /**
+   * --------------------------------------------
+   * AdminLTE Layout.js
+   * License MIT
+   * --------------------------------------------
+   */
+  /**
+   * Constants
+   * ====================================================
+   */
 
-  // var NAME$6 = 'Layout';
-  // var DATA_KEY$6 = 'lte.layout';
-  // var JQUERY_NO_CONFLICT$6 = $__default["default"].fn[NAME$6];
-  // var SELECTOR_HEADER = '.main-header';
-  // var SELECTOR_MAIN_SIDEBAR = '.main-sidebar';
-  // var SELECTOR_SIDEBAR$1 = '.main-sidebar .sidebar';
-  // var SELECTOR_CONTENT = '.content-wrapper';
-  // var SELECTOR_CONTROL_SIDEBAR_CONTENT = '.control-sidebar-content';
-  // var SELECTOR_CONTROL_SIDEBAR_BTN = '[data-widget="control-sidebar"]';
-  // var SELECTOR_FOOTER = '.main-footer';
-  // var SELECTOR_PUSHMENU_BTN = '[data-widget="pushmenu"]';
-  // var SELECTOR_LOGIN_BOX = '.login-box';
-  // var SELECTOR_REGISTER_BOX = '.register-box';
-  // var SELECTOR_PRELOADER = '.preloader';
-  // var CLASS_NAME_SIDEBAR_COLLAPSED$1 = 'sidebar-collapse';
-  // var CLASS_NAME_SIDEBAR_FOCUSED = 'sidebar-focused';
-  // var CLASS_NAME_LAYOUT_FIXED = 'layout-fixed';
-  // var CLASS_NAME_CONTROL_SIDEBAR_SLIDE_OPEN = 'control-sidebar-slide-open';
-  // var CLASS_NAME_CONTROL_SIDEBAR_OPEN = 'control-sidebar-open';
-  // var CLASS_NAME_IFRAME_MODE = 'iframe-mode';
-  // var Default$6 = {
-  //   scrollbarTheme: 'os-theme-light',
-  //   scrollbarAutoHide: 'l',
-  //   panelAutoHeight: true,
-  //   panelAutoHeightMode: 'min-height',
-  //   preloadDuration: 200,
-  //   loginRegisterAutoHeight: true
-  // };
-  // /**
-  //  * Class Definition
-  //  * ====================================================
-  //  */
+  var NAME$6 = 'Layout';
+  var DATA_KEY$6 = 'lte.layout';
+  var JQUERY_NO_CONFLICT$6 = $__default["default"].fn[NAME$6];
+  var SELECTOR_HEADER = '.main-header';
+  var SELECTOR_MAIN_SIDEBAR = '.main-sidebar';
+  var SELECTOR_SIDEBAR$1 = '.main-sidebar .sidebar';
+  var SELECTOR_CONTENT = '.content-wrapper';
+  var SELECTOR_CONTROL_SIDEBAR_CONTENT = '.control-sidebar-content';
+  var SELECTOR_CONTROL_SIDEBAR_BTN = '[data-widget="control-sidebar"]';
+  var SELECTOR_FOOTER = '.main-footer';
+  var SELECTOR_PUSHMENU_BTN = '[data-widget="pushmenu"]';
+  var SELECTOR_LOGIN_BOX = '.login-box';
+  var SELECTOR_REGISTER_BOX = '.register-box';
+  var SELECTOR_PRELOADER = '.preloader';
+  var CLASS_NAME_SIDEBAR_COLLAPSED$1 = 'sidebar-collapse';
+  var CLASS_NAME_SIDEBAR_FOCUSED = 'sidebar-focused';
+  var CLASS_NAME_LAYOUT_FIXED = 'layout-fixed';
+  var CLASS_NAME_CONTROL_SIDEBAR_SLIDE_OPEN = 'control-sidebar-slide-open';
+  var CLASS_NAME_CONTROL_SIDEBAR_OPEN = 'control-sidebar-open';
+  var CLASS_NAME_IFRAME_MODE = 'iframe-mode';
+  var Default$6 = {
+    scrollbarTheme: 'os-theme-light',
+    scrollbarAutoHide: 'l',
+    panelAutoHeight: true,
+    panelAutoHeightMode: 'min-height',
+    preloadDuration: 200,
+    loginRegisterAutoHeight: true
+  };
+  /**
+   * Class Definition
+   * ====================================================
+   */
 
-  // var Layout = /*#__PURE__*/function () {
-  //   function Layout(element, config) {
-  //     this._config = config;
-  //     this._element = element;
-  //   } // Public
-
-
-  //   var _proto = Layout.prototype;
-
-  //   _proto.fixLayoutHeight = function fixLayoutHeight(extra) {
-  //     if (extra === void 0) {
-  //       extra = null;
-  //     }
-
-  //     var $body = $__default["default"]('body');
-  //     var controlSidebar = 0;
-
-  //     if ($body.hasClass(CLASS_NAME_CONTROL_SIDEBAR_SLIDE_OPEN) || $body.hasClass(CLASS_NAME_CONTROL_SIDEBAR_OPEN) || extra === 'control_sidebar') {
-  //       controlSidebar = $__default["default"](SELECTOR_CONTROL_SIDEBAR_CONTENT).outerHeight();
-  //     }
-
-  //     var heights = {
-  //       window: $__default["default"](window).height(),
-  //       header: $__default["default"](SELECTOR_HEADER).length > 0 ? $__default["default"](SELECTOR_HEADER).outerHeight() : 0,
-  //       footer: $__default["default"](SELECTOR_FOOTER).length > 0 ? $__default["default"](SELECTOR_FOOTER).outerHeight() : 0,
-  //       sidebar: $__default["default"](SELECTOR_SIDEBAR$1).length > 0 ? $__default["default"](SELECTOR_SIDEBAR$1).height() : 0,
-  //       controlSidebar: controlSidebar
-  //     };
-
-  //     var max = this._max(heights);
-
-  //     var offset = this._config.panelAutoHeight;
-
-  //     if (offset === true) {
-  //       offset = 0;
-  //     }
-
-  //     var $contentSelector = $__default["default"](SELECTOR_CONTENT);
-
-  //     if (offset !== false) {
-  //       if (max === heights.controlSidebar) {
-  //         $contentSelector.css(this._config.panelAutoHeightMode, max + offset);
-  //       } else if (max === heights.window) {
-  //         $contentSelector.css(this._config.panelAutoHeightMode, max + offset - heights.header - heights.footer);
-  //       } else {
-  //         $contentSelector.css(this._config.panelAutoHeightMode, max + offset - heights.header);
-  //       }
-
-  //       if (this._isFooterFixed()) {
-  //         $contentSelector.css(this._config.panelAutoHeightMode, parseFloat($contentSelector.css(this._config.panelAutoHeightMode)) + heights.footer);
-  //       }
-  //     }
-
-  //     if (!$body.hasClass(CLASS_NAME_LAYOUT_FIXED)) {
-  //       return;
-  //     }
-
-  //     if (typeof $__default["default"].fn.overlayScrollbars !== 'undefined') {
-  //       $__default["default"](SELECTOR_SIDEBAR$1).overlayScrollbars({
-  //         className: this._config.scrollbarTheme,
-  //         sizeAutoCapable: true,
-  //         scrollbars: {
-  //           autoHide: this._config.scrollbarAutoHide,
-  //           clickScrolling: true
-  //         }
-  //       });
-  //     } else {
-  //       $__default["default"](SELECTOR_SIDEBAR$1).css('overflow-y', 'auto');
-  //     }
-  //   };
-
-  //   _proto.fixLoginRegisterHeight = function fixLoginRegisterHeight() {
-  //     var $body = $__default["default"]('body');
-  //     var $selector = $__default["default"](SELECTOR_LOGIN_BOX + ", " + SELECTOR_REGISTER_BOX);
-
-  //     if ($body.hasClass(CLASS_NAME_IFRAME_MODE)) {
-  //       $body.css('height', '100%');
-  //       $__default["default"]('.wrapper').css('height', '100%');
-  //       $__default["default"]('html').css('height', '100%');
-  //     } else if ($selector.length === 0) {
-  //       $body.css('height', 'auto');
-  //       $__default["default"]('html').css('height', 'auto');
-  //     } else {
-  //       var boxHeight = $selector.height();
-
-  //       if ($body.css(this._config.panelAutoHeightMode) !== boxHeight) {
-  //         $body.css(this._config.panelAutoHeightMode, boxHeight);
-  //       }
-  //     }
-  //   } // Private
-  //   ;
-
-  //   _proto._init = function _init() {
-  //     var _this = this;
-
-  //     // Activate layout height watcher
-  //     this.fixLayoutHeight();
-
-  //     if (this._config.loginRegisterAutoHeight === true) {
-  //       this.fixLoginRegisterHeight();
-  //     } else if (this._config.loginRegisterAutoHeight === parseInt(this._config.loginRegisterAutoHeight, 10)) {
-  //       setInterval(this.fixLoginRegisterHeight, this._config.loginRegisterAutoHeight);
-  //     }
-
-  //     $__default["default"](SELECTOR_SIDEBAR$1).on('collapsed.lte.treeview expanded.lte.treeview', function () {
-  //       _this.fixLayoutHeight();
-  //     });
-  //     $__default["default"](SELECTOR_MAIN_SIDEBAR).on('mouseenter mouseleave', function () {
-  //       if ($__default["default"]('body').hasClass(CLASS_NAME_SIDEBAR_COLLAPSED$1)) {
-  //         _this.fixLayoutHeight();
-  //       }
-  //     });
-  //     $__default["default"](SELECTOR_PUSHMENU_BTN).on('collapsed.lte.pushmenu shown.lte.pushmenu', function () {
-  //       setTimeout(function () {
-  //         _this.fixLayoutHeight();
-  //       }, 300);
-  //     });
-  //     $__default["default"](SELECTOR_CONTROL_SIDEBAR_BTN).on('collapsed.lte.controlsidebar', function () {
-  //       _this.fixLayoutHeight();
-  //     }).on('expanded.lte.controlsidebar', function () {
-  //       _this.fixLayoutHeight('control_sidebar');
-  //     });
-  //     $__default["default"](window).resize(function () {
-  //       _this.fixLayoutHeight();
-  //     });
-  //     setTimeout(function () {
-  //       $__default["default"]('body.hold-transition').removeClass('hold-transition');
-  //     }, 50);
-  //     setTimeout(function () {
-  //       var $preloader = $__default["default"](SELECTOR_PRELOADER);
-
-  //       if ($preloader) {
-  //         $preloader.css('height', 0);
-  //         setTimeout(function () {
-  //           $preloader.children().hide();
-  //         }, 200);
-  //       }
-  //     }, this._config.preloadDuration);
-  //   };
-
-  //   _proto._max = function _max(numbers) {
-  //     // Calculate the maximum number in a list
-  //     var max = 0;
-  //     Object.keys(numbers).forEach(function (key) {
-  //       if (numbers[key] > max) {
-  //         max = numbers[key];
-  //       }
-  //     });
-  //     return max;
-  //   };
-
-  //   _proto._isFooterFixed = function _isFooterFixed() {
-  //     return $__default["default"](SELECTOR_FOOTER).css('position') === 'fixed';
-  //   } // Static
-  //   ;
-
-  //   Layout._jQueryInterface = function _jQueryInterface(config) {
-  //     if (config === void 0) {
-  //       config = '';
-  //     }
-
-  //     return this.each(function () {
-  //       var data = $__default["default"](this).data(DATA_KEY$6);
-
-  //       var _options = $__default["default"].extend({}, Default$6, $__default["default"](this).data());
-
-  //       if (!data) {
-  //         data = new Layout($__default["default"](this), _options);
-  //         $__default["default"](this).data(DATA_KEY$6, data);
-  //       }
-
-  //       if (config === 'init' || config === '') {
-  //         data._init();
-  //       } else if (config === 'fixLayoutHeight' || config === 'fixLoginRegisterHeight') {
-  //         data[config]();
-  //       }
-  //     });
-  //   };
-
-  //   return Layout;
-  // }();
-  // /**
-  //  * Data API
-  //  * ====================================================
-  //  */
+  var Layout = /*#__PURE__*/function () {
+    function Layout(element, config) {
+      this._config = config;
+      this._element = element;
+    } // Public
 
 
-  // $__default["default"](window).on('load', function () {
-  //   Layout._jQueryInterface.call($__default["default"]('body'));
-  // });
-  // $__default["default"](SELECTOR_SIDEBAR$1 + " a").on('focusin', function () {
-  //   $__default["default"](SELECTOR_MAIN_SIDEBAR).addClass(CLASS_NAME_SIDEBAR_FOCUSED);
-  // }).on('focusout', function () {
-  //   $__default["default"](SELECTOR_MAIN_SIDEBAR).removeClass(CLASS_NAME_SIDEBAR_FOCUSED);
-  // });
-  // /**
-  //  * jQuery API
-  //  * ====================================================
-  //  */
+    var _proto = Layout.prototype;
 
-  // $__default["default"].fn[NAME$6] = Layout._jQueryInterface;
-  // $__default["default"].fn[NAME$6].Constructor = Layout;
+    _proto.fixLayoutHeight = function fixLayoutHeight(extra) {
+      if (extra === void 0) {
+        extra = null;
+      }
 
-  // $__default["default"].fn[NAME$6].noConflict = function () {
-  //   $__default["default"].fn[NAME$6] = JQUERY_NO_CONFLICT$6;
-  //   return Layout._jQueryInterface;
-  // };
+      var $body = $__default["default"]('body');
+      var controlSidebar = 0;
+
+      if ($body.hasClass(CLASS_NAME_CONTROL_SIDEBAR_SLIDE_OPEN) || $body.hasClass(CLASS_NAME_CONTROL_SIDEBAR_OPEN) || extra === 'control_sidebar') {
+        controlSidebar = $__default["default"](SELECTOR_CONTROL_SIDEBAR_CONTENT).outerHeight();
+      }
+
+      var heights = {
+        window: $__default["default"](window).height(),
+        header: $__default["default"](SELECTOR_HEADER).length > 0 ? $__default["default"](SELECTOR_HEADER).outerHeight() : 0,
+        footer: $__default["default"](SELECTOR_FOOTER).length > 0 ? $__default["default"](SELECTOR_FOOTER).outerHeight() : 0,
+        sidebar: $__default["default"](SELECTOR_SIDEBAR$1).length > 0 ? $__default["default"](SELECTOR_SIDEBAR$1).height() : 0,
+        controlSidebar: controlSidebar
+      };
+
+      var max = this._max(heights);
+
+      var offset = this._config.panelAutoHeight;
+
+      if (offset === true) {
+        offset = 0;
+      }
+
+      var $contentSelector = $__default["default"](SELECTOR_CONTENT);
+
+      if (offset !== false) {
+        if (max === heights.controlSidebar) {
+          $contentSelector.css(this._config.panelAutoHeightMode, max + offset);
+        } else if (max === heights.window) {
+          $contentSelector.css(this._config.panelAutoHeightMode, max + offset - heights.header - heights.footer);
+        } else {
+          $contentSelector.css(this._config.panelAutoHeightMode, max + offset - heights.header);
+        }
+
+        if (this._isFooterFixed()) {
+          $contentSelector.css(this._config.panelAutoHeightMode, parseFloat($contentSelector.css(this._config.panelAutoHeightMode)) + heights.footer);
+        }
+      }
+
+      if (!$body.hasClass(CLASS_NAME_LAYOUT_FIXED)) {
+        return;
+      }
+
+      if (typeof $__default["default"].fn.overlayScrollbars !== 'undefined') {
+        $__default["default"](SELECTOR_SIDEBAR$1).overlayScrollbars({
+          className: this._config.scrollbarTheme,
+          sizeAutoCapable: true,
+          scrollbars: {
+            autoHide: this._config.scrollbarAutoHide,
+            clickScrolling: true
+          }
+        });
+      } else {
+        $__default["default"](SELECTOR_SIDEBAR$1).css('overflow-y', 'auto');
+      }
+    };
+
+    _proto.fixLoginRegisterHeight = function fixLoginRegisterHeight() {
+      var $body = $__default["default"]('body');
+      var $selector = $__default["default"](SELECTOR_LOGIN_BOX + ", " + SELECTOR_REGISTER_BOX);
+
+      if ($body.hasClass(CLASS_NAME_IFRAME_MODE)) {
+        $body.css('height', '100%');
+        $__default["default"]('.wrapper').css('height', '100%');
+        $__default["default"]('html').css('height', '100%');
+      } else if ($selector.length === 0) {
+        $body.css('height', 'auto');
+        $__default["default"]('html').css('height', 'auto');
+      } else {
+        var boxHeight = $selector.height();
+
+        if ($body.css(this._config.panelAutoHeightMode) !== boxHeight) {
+          $body.css(this._config.panelAutoHeightMode, boxHeight);
+        }
+      }
+    } // Private
+    ;
+
+    _proto._init = function _init() {
+      var _this = this;
+
+      // Activate layout height watcher
+      this.fixLayoutHeight();
+
+      if (this._config.loginRegisterAutoHeight === true) {
+        this.fixLoginRegisterHeight();
+      } else if (this._config.loginRegisterAutoHeight === parseInt(this._config.loginRegisterAutoHeight, 10)) {
+        setInterval(this.fixLoginRegisterHeight, this._config.loginRegisterAutoHeight);
+      }
+
+      $__default["default"](SELECTOR_SIDEBAR$1).on('collapsed.lte.treeview expanded.lte.treeview', function () {
+        _this.fixLayoutHeight();
+      });
+      $__default["default"](SELECTOR_MAIN_SIDEBAR).on('mouseenter mouseleave', function () {
+        if ($__default["default"]('body').hasClass(CLASS_NAME_SIDEBAR_COLLAPSED$1)) {
+          _this.fixLayoutHeight();
+        }
+      });
+      $__default["default"](SELECTOR_PUSHMENU_BTN).on('collapsed.lte.pushmenu shown.lte.pushmenu', function () {
+        setTimeout(function () {
+          _this.fixLayoutHeight();
+        }, 300);
+      });
+      $__default["default"](SELECTOR_CONTROL_SIDEBAR_BTN).on('collapsed.lte.controlsidebar', function () {
+        _this.fixLayoutHeight();
+      }).on('expanded.lte.controlsidebar', function () {
+        _this.fixLayoutHeight('control_sidebar');
+      });
+      $__default["default"](window).resize(function () {
+        _this.fixLayoutHeight();
+      });
+      setTimeout(function () {
+        $__default["default"]('body.hold-transition').removeClass('hold-transition');
+      }, 50);
+      setTimeout(function () {
+        var $preloader = $__default["default"](SELECTOR_PRELOADER);
+
+        if ($preloader) {
+          $preloader.css('height', 0);
+          setTimeout(function () {
+            $preloader.children().hide();
+          }, 200);
+        }
+      }, this._config.preloadDuration);
+    };
+
+    _proto._max = function _max(numbers) {
+      // Calculate the maximum number in a list
+      var max = 0;
+      Object.keys(numbers).forEach(function (key) {
+        if (numbers[key] > max) {
+          max = numbers[key];
+        }
+      });
+      return max;
+    };
+
+    _proto._isFooterFixed = function _isFooterFixed() {
+      return $__default["default"](SELECTOR_FOOTER).css('position') === 'fixed';
+    } // Static
+    ;
+
+    Layout._jQueryInterface = function _jQueryInterface(config) {
+      if (config === void 0) {
+        config = '';
+      }
+
+      return this.each(function () {
+        var data = $__default["default"](this).data(DATA_KEY$6);
+
+        var _options = $__default["default"].extend({}, Default$6, $__default["default"](this).data());
+
+        if (!data) {
+          data = new Layout($__default["default"](this), _options);
+          $__default["default"](this).data(DATA_KEY$6, data);
+        }
+
+        if (config === 'init' || config === '') {
+          data._init();
+        } else if (config === 'fixLayoutHeight' || config === 'fixLoginRegisterHeight') {
+          data[config]();
+        }
+      });
+    };
+
+    return Layout;
+  }();
+  /**
+   * Data API
+   * ====================================================
+   */
+
+
+  $__default["default"](window).on('load', function () {
+    Layout._jQueryInterface.call($__default["default"]('body'));
+  });
+  $__default["default"](SELECTOR_SIDEBAR$1 + " a").on('focusin', function () {
+    $__default["default"](SELECTOR_MAIN_SIDEBAR).addClass(CLASS_NAME_SIDEBAR_FOCUSED);
+  }).on('focusout', function () {
+    $__default["default"](SELECTOR_MAIN_SIDEBAR).removeClass(CLASS_NAME_SIDEBAR_FOCUSED);
+  });
+  /**
+   * jQuery API
+   * ====================================================
+   */
+
+  $__default["default"].fn[NAME$6] = Layout._jQueryInterface;
+  $__default["default"].fn[NAME$6].Constructor = Layout;
+
+  $__default["default"].fn[NAME$6].noConflict = function () {
+    $__default["default"].fn[NAME$6] = JQUERY_NO_CONFLICT$6;
+    return Layout._jQueryInterface;
+  };
 
   /**
    * --------------------------------------------

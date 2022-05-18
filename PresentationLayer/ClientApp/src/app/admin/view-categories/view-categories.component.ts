@@ -1,19 +1,27 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminService } from 'src/app/shared/admin/admin.service';
 
 @Component({
-  selector: 'app-admin-layout',
-  templateUrl: './admin-layout.component.html',
-  styleUrls: ['./admin-layout.component.css']
+  selector: 'app-view-categories',
+  templateUrl: './view-categories.component.html',
+  styleUrls: ['./view-categories.component.css']
 })
-export class AdminLayoutComponent implements OnInit {
+export class ViewCategoriesComponent implements OnInit {
 
-  constructor() { }
+  constructor(public service:AdminService) { 
+  }
+  data:[];
 
   ngOnInit(): void {
     this.loadScript("assets/plugins/jquery/jquery.min.js");
     this.loadCustomScript()
     this.loadScript("assets/plugins/bootstrap/js/bootstrap.bundle.min.js");
-    this.loadScript("assets/dist/js/adminlte.js");
+
+    this.service.getCategories().subscribe(
+      (data: any) => {
+        this.data = data;
+      }
+    )
   }
 
   public loadScript(url:string) {
@@ -29,5 +37,4 @@ export class AdminLayoutComponent implements OnInit {
     node.type = 'text/javascript';
     document.getElementsByTagName('body')[0].appendChild(node);
   }
-
 }

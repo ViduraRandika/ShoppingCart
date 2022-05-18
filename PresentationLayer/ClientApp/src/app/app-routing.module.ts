@@ -9,6 +9,9 @@ import { RouteGuardService } from './shared/auth/route-guard.service';
 import { TestComponent } from './test/test.component';
 import { ProductListComponent } from './user/shop/product-list/product-list.component';
 import { AdminLayoutComponent } from './_layout/admin-layout/admin-layout.component';
+import { AdminNavLayoutComponent } from './_layout/admin-nav-layout/admin-nav-layout.component';
+import { CreateCategoryComponent } from './admin/create-category/create-category.component';
+import { ViewCategoriesComponent } from './admin/view-categories/view-categories.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'test', component: TestComponent },
@@ -25,33 +28,30 @@ const routes: Routes = [
   { path: 'change-password', component:ChangePasswordComponent},
   { path: 'shop/product-list', component:ProductListComponent},
   { path: 'temp', component:AdminLayoutComponent},
-  // { 
-  //   path: 'admin/create-category', 
-  //   component:CreateCategoryComponent,
-  //   canActivate: [RouteGuardService],
-  //   data: {
-  //     expectedRole: 'admin'
-  //   }
-  // },
+
   {
     path: 'admin',
     redirectTo: 'admin/dashboard',
     pathMatch: 'full'
   },
-  // {
-  //   path: 'admin',
-  //   component: DefaultLayoutComponent,
-  //   data: {
-  //     title: 'Admin Dashboard'
-  //   },
-  //   children: [
-  //     {
-  //       path:'dashboard',
-  //       loadChildren: () =>
-  //         import('./admin/views/dashboard/dashboard.module').then((m) => m.DashboardModule)
-  //     },
-  //   ]
-  // },
+  { 
+        path: 'admin',
+        component: AdminLayoutComponent, 
+        children: [
+          { 
+            path: 'dashboard', 
+            component: AdminNavLayoutComponent 
+          },
+          { 
+            path: 'create-category', 
+            component: CreateCategoryComponent 
+          },
+          { 
+            path: 'view-categories', 
+            component: ViewCategoriesComponent 
+          },
+        ]
+    },
   {
     path: 'register',
     component: RegisterComponent,
@@ -59,7 +59,7 @@ const routes: Routes = [
       title: 'Register Page'
     }
   },
-  {path: '**', redirectTo: 'dashboard'}
+  // {path: '**', redirectTo: 'dashboard'}
 ];
 
 @NgModule({

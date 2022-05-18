@@ -23,7 +23,9 @@ import { ProductListComponent } from './user/shop/product-list/product-list.comp
 import { HeaderComponent } from './user/shop/header/header.component';
 import { UserLayoutComponent } from './_layout/user-layout/user-layout.component';
 import { AdminLayoutComponent } from './_layout/admin-layout/admin-layout.component';
-import { APP_BASE_HREF } from '@angular/common';
+import { AdminNavLayoutComponent } from './_layout/admin-nav-layout/admin-nav-layout.component';
+import { CreateCategoryComponent } from './admin/create-category/create-category.component';
+import { ViewCategoriesComponent } from './admin/view-categories/view-categories.component';
 
 const JWT_Module_Options: JwtModuleOptions = {
     config: {
@@ -50,6 +52,9 @@ export function tokenGetter() {
     HeaderComponent,
     UserLayoutComponent,
     AdminLayoutComponent,
+    AdminNavLayoutComponent,
+    CreateCategoryComponent,
+    ViewCategoriesComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,8 +70,7 @@ export function tokenGetter() {
   ],
   providers: [
     JwtHelperService,
-    Title,
-    {provide: APP_BASE_HREF, useValue: '/'}
+    Title
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,48 @@
+<div class="content-wrapper" style="margin-left: 250px">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>View Categories</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/admin/dashboard">Home</a></li>
+            <li class="breadcrumb-item active">View Categories</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body table-responsive p-0" style="height: 300px">
+          <table class="table table-head-fixed table-hover text-nowrap">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Category Name</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let e of data">
+                <th scope="row">{{ e["categoryId"] }}</th>
+                <td>{{ e["categoryName"] }}</td>
+                <td>
+                  <button class="btn btn-warning normal me-1">Rename</button>
+                  <button class="btn btn-danger normal">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+  </div>
+</div>

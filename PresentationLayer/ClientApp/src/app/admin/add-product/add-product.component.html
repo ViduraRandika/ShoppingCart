@@ -1,1 +1,133 @@
-<p>add-product works!</p>
+<div class="content-wrapper" style="margin-left: 250px">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Add Product</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/admin/dashboard">Home</a></li>
+            <li class="breadcrumb-item active">Add Product</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+
+  <form [formGroup]="addProductForm" (submit)="submit(addProductForm.value)">
+    <div class="card-body">
+      <div class="form-group">
+        <label for="productName">Product Name</label>
+        <input
+          class="form-control"
+          id="productName"
+          formControlName="productName"
+          placeholder="Ex: Charger"
+          type="text"
+        />
+        <div
+          *ngIf="productName && (productName.dirty || productName.touched)"
+          class="validation-alert"
+        >
+          <div *ngIf="productName.errors?.['required']">
+            Product name is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label cLabel for="descriptiopn">Description</label>
+        <textarea
+          class="form-control"
+          id="descriptiopn"
+          formControlName="description"
+          rows="3"
+        ></textarea>
+        <div
+          *ngIf="description && (description.dirty || description.touched)"
+          class="validation-alert"
+        >
+          <div *ngIf="description.errors?.['required']">
+            Description is required.
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label cLabel for="selectCategory">Select Category</label>
+        <select
+          id="selectCategory"
+          formControlName="selectCategory"
+          aria-label="Category Select"
+          class="form-control"
+        >
+          <option disabled selected>Open this select menu</option>
+          <option *ngFor="let e of data" value="{{ e['categoryId'] }}">
+            {{ e["description"] }}
+          </option>
+        </select>
+        <div
+          *ngIf="
+            selectCategory && (selectCategory.dirty || selectCategory.touched)
+          "
+          class="validation-alert"
+        >
+          <div *ngIf="selectCategory.errors?.['required']">
+            Category is required.
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label cLabel for="price">Price (In Rupees)</label>
+        <input
+          class="form-control"
+          id="price"
+          formControlName="price"
+          placeholder="Ex: 1450"
+          type="number"
+        />
+        <div
+          *ngIf="price && (price.dirty || price.touched)"
+          class="validation-alert"
+        >
+          <div *ngIf="price.errors?.['required']">Price is required.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label cLabel for="productImagePath">Product Image</label>
+        <input
+          class="form-control"
+          id="productImagePath"
+          formControlName="productImagePath"
+          #file
+          type="file"
+          accept="image/*"
+          (change)="uploadFile(file.files)"
+        />
+        <div
+          *ngIf="
+            productImagePath &&
+            (productImagePath.dirty || productImagePath.touched)
+          "
+          class="validation-alert"
+        >
+          <div *ngIf="productImagePath.errors?.['required']">
+            Product image is required.
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.card-body -->
+
+    <div class="card-footer">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="addProductForm.invalid"
+      >
+        SAVE
+      </button>
+    </div>
+  </form>
+</div>

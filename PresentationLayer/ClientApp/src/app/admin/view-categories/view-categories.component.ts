@@ -8,9 +8,9 @@ import { AdminService } from 'src/app/shared/admin/admin.service';
 })
 export class ViewCategoriesComponent implements OnInit {
 
-  constructor(public service:AdminService) { 
+  constructor(public service: AdminService) {
   }
-  data:[];
+  data: [];
 
   ngOnInit(): void {
     this.loadScript("assets/plugins/jquery/jquery.min.js");
@@ -24,16 +24,16 @@ export class ViewCategoriesComponent implements OnInit {
     )
   }
 
-  public loadScript(url:string) {
+  public loadScript(url: string) {
     let node = document.createElement('script');
     node.src = url;
     node.type = 'text/javascript';
     document.getElementsByTagName('body')[0].appendChild(node);
   }
 
-  public loadCustomScript(){
+  public loadCustomScript() {
     let node = document.createElement('script');
-    node.integrity="$.widget.bridge('uibutton', $.ui.button)"
+    node.integrity = "$.widget.bridge('uibutton', $.ui.button)"
     node.type = 'text/javascript';
     document.getElementsByTagName('body')[0].appendChild(node);
   }

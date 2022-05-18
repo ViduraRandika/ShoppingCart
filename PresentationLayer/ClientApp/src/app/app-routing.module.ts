@@ -12,6 +12,8 @@ import { AdminLayoutComponent } from './_layout/admin-layout/admin-layout.compon
 import { AdminNavLayoutComponent } from './_layout/admin-nav-layout/admin-nav-layout.component';
 import { CreateCategoryComponent } from './admin/create-category/create-category.component';
 import { ViewCategoriesComponent } from './admin/view-categories/view-categories.component';
+import { AddProductComponent } from './admin/add-product/add-product.component';
+import { ViewProductsComponent } from './admin/view-products/view-products.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'test', component: TestComponent },
@@ -49,6 +51,14 @@ const routes: Routes = [
           { 
             path: 'view-categories', 
             component: ViewCategoriesComponent 
+          },
+          { 
+            path: 'add-product', 
+            component: AddProductComponent 
+          },
+          { 
+            path: 'view-products', 
+            component: ViewProductsComponent 
           },
         ]
     },

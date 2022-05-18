@@ -1,1 +1,51 @@
-<p>view-products works!</p>
+<div class="content-wrapper" style="margin-left: 250px">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>View Products</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/admin/dashboard">Home</a></li>
+            <li class="breadcrumb-item active">View Products</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body table-responsive p-0" style="height: 300px">
+          <table class="table table-head-fixed table-hover text-nowrap">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Price (Rs)</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let e of data">
+                <th scope="row">{{ e["productId"] }}</th>
+                <td>{{ e["productName"] }}</td>
+                <td>{{ e["price"] }}</td>
+                <td>
+                  <button type="button" class="btn btn-link normal me-1">
+                    More
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+  </div>
+</div>

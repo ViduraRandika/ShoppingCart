@@ -16,16 +16,16 @@ export class AdminLayoutComponent implements OnInit {
     this.loadScript("assets/dist/js/adminlte.js");
   }
 
-  public loadScript(url:string) {
+  public loadScript(url: string) {
     let node = document.createElement('script');
     node.src = url;
     node.type = 'text/javascript';
     document.getElementsByTagName('body')[0].appendChild(node);
   }
 
-  public loadCustomScript(){
+  public loadCustomScript() {
     let node = document.createElement('script');
-    node.integrity="$.widget.bridge('uibutton', $.ui.button)"
+    node.integrity = "$.widget.bridge('uibutton', $.ui.button)"
     node.type = 'text/javascript';
     document.getElementsByTagName('body')[0].appendChild(node);
   }

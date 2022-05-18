@@ -9,7 +9,7 @@ import { AdminService } from 'src/app/shared/admin/admin.service';
 })
 export class CreateCategoryComponent implements OnInit {
 
-  constructor(public service:AdminService, private fb:FormBuilder) { }
+  constructor(public service: AdminService, private fb: FormBuilder) { }
 
   createCategoryForm = this.fb.group({
     categoryName: ['']
@@ -22,34 +22,34 @@ export class CreateCategoryComponent implements OnInit {
 
     this.createCategoryForm = new FormGroup(
       {
-        categoryName: new FormControl("",[
+        categoryName: new FormControl("", [
           Validators.required
         ])
       }
     )
   }
 
-  get categoryName(){
+  get categoryName() {
     return this.createCategoryForm.get('categoryName')
   }
 
-  onSubmit(formData:any){
-    this.service.postCreateCategory(formData).subscribe((data : any) => {
+  onSubmit(formData: any) {
+    this.service.postCreateCategory(formData).subscribe((data: any) => {
       window.alert("Category created successfully")
       // this.createCategoryForm.reset
     })
   }
 
-  public loadScript(url:string) {
+  public loadScript(url: string) {
     let node = document.createElement('script');
     node.src = url;
     node.type = 'text/javascript';
     document.getElementsByTagName('body')[0].appendChild(node);
   }
 
-  public loadCustomScript(){
+  public loadCustomScript() {
     let node = document.createElement('script');
-    node.integrity="$.widget.bridge('uibutton', $.ui.button)"
+    node.integrity = "$.widget.bridge('uibutton', $.ui.button)"
     node.type = 'text/javascript';
     document.getElementsByTagName('body')[0].appendChild(node);
   }

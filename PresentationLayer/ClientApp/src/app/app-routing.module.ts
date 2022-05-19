@@ -14,54 +14,76 @@ import { CreateCategoryComponent } from './admin/create-category/create-category
 import { ViewCategoriesComponent } from './admin/view-categories/view-categories.component';
 import { AddProductComponent } from './admin/add-product/add-product.component';
 import { ViewProductsComponent } from './admin/view-products/view-products.component';
+import { UserShopLayoutComponent } from './_layout/user-shop-layout/user-shop-layout.component';
+import { ProoductDetailsComponent } from './user/shop/prooduct-details/prooduct-details.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'test', component: TestComponent },
-  { 
+  {
     path: 'home', component: HomeComponent,
     canActivate: [RouteGuardService],
     data: {
       expectedRole: "any"
     }
   },
-  { path: 'login', component:LoginComponent },
-  { path: 'register', component:RegisterComponent},
-  { path: 'forgot-password', component:ForgotPasswordComponent},
-  { path: 'change-password', component:ChangePasswordComponent},
-  { path: 'shop/product-list', component:ProductListComponent},
-  { path: 'temp', component:AdminLayoutComponent},
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'change-password', component: ChangePasswordComponent },
+  { path: 'shop', component: ProductListComponent },
+  { path: 'temp', component: UserShopLayoutComponent },
 
   {
     path: 'admin',
     redirectTo: 'admin/dashboard',
     pathMatch: 'full'
   },
-  { 
-        path: 'admin',
-        component: AdminLayoutComponent, 
-        children: [
-          { 
-            path: 'dashboard', 
-            component: AdminNavLayoutComponent 
-          },
-          { 
-            path: 'create-category', 
-            component: CreateCategoryComponent 
-          },
-          { 
-            path: 'view-categories', 
-            component: ViewCategoriesComponent 
-          },
-          { 
-            path: 'add-product', 
-            component: AddProductComponent 
-          },
-          { 
-            path: 'view-products', 
-            component: ViewProductsComponent 
-          },
-        ]
-    },
+  {
+    path: 'admin',
+    component: AdminLayoutComponent,
+    children: [
+      {
+        path: 'dashboard',
+        component: AdminNavLayoutComponent
+      },
+      {
+        path: 'create-category',
+        component: CreateCategoryComponent
+      },
+      {
+        path: 'view-categories',
+        component: ViewCategoriesComponent
+      },
+      {
+        path: 'add-product',
+        component: AddProductComponent
+      },
+      {
+        path: 'view-products',
+        component: ViewProductsComponent
+      },
+    ]
+  },
+
+  {
+    path: 'user',
+    redirectTo: 'user/shop',
+    pathMatch: 'full'
+  },
+  {
+    path:'user',
+    component:UserShopLayoutComponent,
+    children: [
+      {
+        path:'shop',
+        component: ProductListComponent
+      },
+      {
+        path:'shop/product-details',
+        component: ProoductDetailsComponent
+      }
+    ]
+  },
   {
     path: 'register',
     component: RegisterComponent,
@@ -75,7 +97,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
-      
+
     })
   ],
   exports: [RouterModule]

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-product-list',
-  templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  selector: 'app-user-shop-layout',
+  templateUrl: './user-shop-layout.component.html',
+  styleUrls: ['./user-shop-layout.component.css']
 })
-export class ProductListComponent implements OnInit {
+export class UserShopLayoutComponent implements OnInit {
 
   constructor() { }
 
@@ -19,11 +19,12 @@ export class ProductListComponent implements OnInit {
     this.loadScript("assets/user/js/owl.carousel.min.js");
     this.loadScript("assets/user/js/main.js");
   }
-
+  
   public loadScript(url: string) {
     let node = document.createElement('script');
     node.src = url;
     node.type = 'text/javascript';
     document.getElementsByTagName('body')[0].appendChild(node);
   }
+
 }

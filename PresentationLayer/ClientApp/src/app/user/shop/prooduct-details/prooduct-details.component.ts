@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-product-list',
-  templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  selector: 'app-prooduct-details',
+  templateUrl: './prooduct-details.component.html',
+  styleUrls: ['./prooduct-details.component.css']
 })
-export class ProductListComponent implements OnInit {
+export class ProoductDetailsComponent implements OnInit {
 
   constructor() { }
 
@@ -26,4 +26,5 @@ export class ProductListComponent implements OnInit {
     node.type = 'text/javascript';
     document.getElementsByTagName('body')[0].appendChild(node);
   }
+
 }

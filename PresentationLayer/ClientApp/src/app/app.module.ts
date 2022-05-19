@@ -20,14 +20,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { TestComponent } from './test/test.component';
 import { ProductListComponent } from './user/shop/product-list/product-list.component';
-import { HeaderComponent } from './user/shop/header/header.component';
-import { UserLayoutComponent } from './_layout/user-layout/user-layout.component';
 import { AdminLayoutComponent } from './_layout/admin-layout/admin-layout.component';
 import { AdminNavLayoutComponent } from './_layout/admin-nav-layout/admin-nav-layout.component';
 import { CreateCategoryComponent } from './admin/create-category/create-category.component';
 import { ViewCategoriesComponent } from './admin/view-categories/view-categories.component';
 import { AddProductComponent } from './admin/add-product/add-product.component';
 import { ViewProductsComponent } from './admin/view-products/view-products.component';
+import { UserShopLayoutComponent } from './_layout/user-shop-layout/user-shop-layout.component';
+import { ProoductDetailsComponent } from './user/shop/prooduct-details/prooduct-details.component';
 
 const JWT_Module_Options: JwtModuleOptions = {
     config: {
@@ -51,14 +51,14 @@ export function tokenGetter() {
     ChangePasswordComponent,
     TestComponent,
     ProductListComponent,
-    HeaderComponent,
-    UserLayoutComponent,
     AdminLayoutComponent,
     AdminNavLayoutComponent,
     CreateCategoryComponent,
     ViewCategoriesComponent,
     AddProductComponent,
     ViewProductsComponent,
+    UserShopLayoutComponent,
+    ProoductDetailsComponent,
   ],
   imports: [
     BrowserModule,

@@ -25,8 +25,9 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/dist",
-              "src/plugins"
+              "src/assets/dist",
+              "src/assets/plugins",
+              "src/assets/user/img"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",

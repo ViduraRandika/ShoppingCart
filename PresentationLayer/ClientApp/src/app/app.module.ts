@@ -28,6 +28,8 @@ import { AddProductComponent } from './admin/add-product/add-product.component';
 import { ViewProductsComponent } from './admin/view-products/view-products.component';
 import { UserShopLayoutComponent } from './_layout/user-shop-layout/user-shop-layout.component';
 import { ProoductDetailsComponent } from './user/shop/prooduct-details/prooduct-details.component';
+import { ShoppingCartComponent } from './user/shop/shopping-cart/shopping-cart.component';
+import { ContactComponent } from './user/contact/contact.component';
 
 const JWT_Module_Options: JwtModuleOptions = {
     config: {
@@ -59,6 +61,8 @@ export function tokenGetter() {
     ViewProductsComponent,
     UserShopLayoutComponent,
     ProoductDetailsComponent,
+    ShoppingCartComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,

@@ -16,6 +16,8 @@ import { AddProductComponent } from './admin/add-product/add-product.component';
 import { ViewProductsComponent } from './admin/view-products/view-products.component';
 import { UserShopLayoutComponent } from './_layout/user-shop-layout/user-shop-layout.component';
 import { ProoductDetailsComponent } from './user/shop/prooduct-details/prooduct-details.component';
+import { ContactComponent } from './user/contact/contact.component';
+import { ShoppingCartComponent } from './user/shop/shopping-cart/shopping-cart.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'test', component: TestComponent },
@@ -30,7 +32,6 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'change-password', component: ChangePasswordComponent },
-  { path: 'shop', component: ProductListComponent },
   { path: 'temp', component: UserShopLayoutComponent },
 
   {
@@ -75,12 +76,23 @@ const routes: Routes = [
     component:UserShopLayoutComponent,
     children: [
       {
+        path:'contact',
+        component: ContactComponent,
+        data: {
+          active: 'contact'
+        }
+      },
+      {
         path:'shop',
         component: ProductListComponent
       },
       {
         path:'shop/product-details',
         component: ProoductDetailsComponent
+      },
+      {
+        path:'shop/shopping-cart',
+        component: ShoppingCartComponent
       }
     ]
   },

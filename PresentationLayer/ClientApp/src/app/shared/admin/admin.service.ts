@@ -28,7 +28,7 @@ export class AdminService {
 
   getCategories(){
     return this.http
-      .get('/api/admin/view-categories', {responseType: 'json'})
+      .get('/api/view-categories', {responseType: 'json'})
       .pipe(
         catchError(
           this.handleError
@@ -54,7 +54,7 @@ export class AdminService {
 
   getProducts(){
     return this.http
-      .get('/api/admin/view-products', {responseType: 'json'})
+      .get('/api/view-products', {responseType: 'json'})
       .pipe(
         catchError(
           this.handleError

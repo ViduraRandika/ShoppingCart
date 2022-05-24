@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using DataAccessLayer.Functions;
 using LogicLayer.AdminLogic;
+using LogicLayer.GenaralLogics;
 using LogicLayer.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -37,15 +39,6 @@ namespace PresentationLayer.API
             };
         }
 
-        [Route("view-categories")]
-        [HttpGet]
-        public async Task<List<CategoryViewModel>> ViewCategories()
-        {
-
-            var categories= await _adminLogic.ViewCategories();
-
-            return categories;
-        }
 
 
         [Route("add-product")]
@@ -102,14 +95,6 @@ namespace PresentationLayer.API
             }
         }
 
-        [Route("view-products")]
-        [HttpGet]
-        public async Task<List<ProductViewModel>> ViewProducts()
-        {
-
-            var produts = await _adminLogic.ViewProducts();
-
-            return produts;
-        }
+        
     }
 }

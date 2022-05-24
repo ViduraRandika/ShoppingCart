@@ -59,27 +59,5 @@ namespace DataAccessLayer.Functions
                 return 400;
             }
         }
-
-        public async Task<List<Category>> ViewCategories()
-        {
-            List<Category> categories = new List<Category>();
-            using (var context = new DatabaseContext(DatabaseContext.ops.dbOptions))
-            {
-                categories = await context.Categories.ToListAsync();
-            }
-
-            return categories;
-        }
-
-        public async Task<List<Product>> ViewProducts()
-        {
-            List<Product> products = new List<Product>();
-            using (var context = new DatabaseContext(DatabaseContext.ops.dbOptions))
-            {
-                products = await context.Products.Include(c=>c.Category).ToListAsync();
-            }
-
-            return products;
-        }
     }
 }

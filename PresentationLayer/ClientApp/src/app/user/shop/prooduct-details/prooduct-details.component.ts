@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Product } from 'src/app/model/product';
+import { UserService } from 'src/app/shared/user/user.service';
 
 @Component({
   selector: 'app-prooduct-details',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProoductDetailsComponent implements OnInit {
 
-  constructor() { }
+  id:number;
+  productDetails:Product;
+  constructor(private service:UserService, private route:ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.queryParams
+      .subscribe(params=>{
+        this.id = params['id'];
+      })
+
+    this.service.getSelectedProductDetails(this.id).subscribe(
+      (productDetails: any) => {
+        this.productDetails = productDetails;
+        console.log(this.productDetails);
+      }
+    )  
     this.loadScript("assets/user/js/jquery-3.3.1.min.js");
     this.loadScript("assets/user/js/bootstrap.min.js");
     this.loadScript("assets/user/js/jquery.nice-select.min.js");

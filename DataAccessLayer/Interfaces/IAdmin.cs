@@ -8,11 +8,8 @@ namespace DataAccessLayer.Interfaces
     {
         Task<int> CreateCategory(string categoryName);
 
-        Task<List<Category>> ViewCategories();
-
         Task<int> AddNewProduct(string productName, string description, float price, string productImagePath,
             int categoryId);
 
-        Task<List<Product>> ViewProducts();
     }
 }

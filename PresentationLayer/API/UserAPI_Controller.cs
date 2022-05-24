@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using DataAccessLayer.Entities;
+using LogicLayer.GenaralLogics;
 using LogicLayer.UserLogic;
 using Microsoft.AspNetCore.Authorization;
 using PresentationLayer.Models.ReqModels;
@@ -13,6 +17,7 @@ namespace PresentationLayer.API
     public class UserAPI_Controller : ControllerBase
     {
         private readonly UserLogic userLogic = new UserLogic();
+        private readonly SendEmailLogic sendEmailLogic = new SendEmailLogic();
 
 
         [AllowAnonymous]
@@ -46,6 +51,26 @@ namespace PresentationLayer.API
         {
             List<User> users = await userLogic.GetAllUsers();
             return users;
+        }
+
+
+        [Route("sendContactUsMsg")]
+        [HttpPost]
+        public IActionResult sendMail([FromBody] RContact contact)
+        {
+            if (ModelState.IsValid)
+            {
+                if (sendEmailLogic.sendEmail(contact.email,"Message from contact form",contact.body,contact.name))
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+
+            return BadRequest();
         }
     }
 }

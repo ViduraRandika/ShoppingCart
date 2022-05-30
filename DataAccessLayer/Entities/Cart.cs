@@ -9,7 +9,7 @@ namespace DataAccessLayer.Entities
         [Key] public long CartId { get; set; }
 
         public User User{ get; set; }
-        [Required] public int UserId { get; set; }
+        [Required] public long UserId { get; set; }
 
         [Required] public string Status { get; set; }
 

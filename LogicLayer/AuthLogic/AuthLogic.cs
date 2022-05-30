@@ -52,6 +52,7 @@ namespace LogicLayer.AuthLogic
             JwtSecurityToken token = new JwtSecurityToken(
                 claims: new[]
                 {
+                    new Claim(ClaimTypes.UserData,user.UserId.ToString()),
                     new Claim(ClaimTypes.Email, email),
                     new Claim(ClaimTypes.Name, user.UserFullName),
                     new Claim(ClaimTypes.StreetAddress, user.UserAddress),

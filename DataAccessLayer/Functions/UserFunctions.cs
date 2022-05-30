@@ -53,5 +53,88 @@ namespace DataAccessLayer.Functions
 
           return users;
       }
+
+      public async Task<Cart> GetCartDetails(long userID, string status)
+      {
+          var cart = new Cart();
+          var context = new DatabaseContext(DatabaseContext.ops.dbOptions);
+          try
+          {
+              cart = context.Carts.Single(c => c.UserId == userID && c.Status == status);
+              return cart;
+          }
+          catch (Exception e)
+          {
+              return null;
+          }
+      }
+
+      public async Task<Cart> OpenNewCart(long userId)
+      {
+          try
+          {
+              var context = new DatabaseContext(DatabaseContext.ops.dbOptions);
+
+              var newCart = new Cart
+              {
+                  UserId = userId,
+                  Status = "open"
+              };
+
+              await context.Carts.AddAsync(newCart);
+              await context.SaveChangesAsync();
+
+              return newCart;
+          }
+          catch (Exception e)
+          {
+              return null;
+          }
+      }
+
+      public async Task<bool> AddProductToCart(int productId, long cartId, int qty)
+      {
+          var context = new DatabaseContext(DatabaseContext.ops.dbOptions);
+
+          var cartItem = new CartItem();
+          try
+          {
+              cartItem = context.CartItems.Single(c => c.CartId == cartId && c.ProductId == productId);
+          }
+          catch (Exception e)
+          {
+              cartItem = null;
+          }
+
+
+          try
+          {
+              if (cartItem == null)
+              {
+                  var newCartItem = new CartItem
+                  {
+                      CartId = cartId,
+                      ProductId = productId,
+                      Qty = qty
+                  };
+
+                  await context.CartItems.AddAsync(newCartItem);
+                  await context.SaveChangesAsync();
+
+                  return true;
+              }
+
+              var newQty = cartItem.Qty + qty;
+              cartItem.Qty = newQty;
+              context.SaveChangesAsync();
+
+              return true;
+          }
+          catch (Exception e)
+          {
+              return false;
+          }
+
+      }
     }
 }

@@ -77,7 +77,7 @@ namespace PresentationLayer.API
                     var uniqueFileName = $@"{DateTime.Now.Ticks}"+ext;
                     
                     var fullPath = Path.Combine(pathToSave, uniqueFileName);
-                    var dbPath = Path.Combine(folderName, uniqueFileName);
+                    var dbPath = Path.Combine(uniqueFileName);
                     await using (var stream = new FileStream(fullPath, FileMode.Create))
                     {
                         file.CopyTo(stream);

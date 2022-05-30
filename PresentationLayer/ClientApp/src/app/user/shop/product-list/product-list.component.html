@@ -7,16 +7,8 @@
           <div class="sidebar__item">
             <h4>Categories</h4>
             <ul>
-              <li><a href="#">All</a></li>
-              <li><a href="#">Vegetables</a></li>
-              <li><a href="#">Fruit & Nut Gifts</a></li>
-              <li><a href="#">Fresh Berries</a></li>
-              <li><a href="#">Ocean Foods</a></li>
-              <li><a href="#">Butter & Eggs</a></li>
-              <li><a href="#">Fastfood</a></li>
-              <li><a href="#">Fresh Onion</a></li>
-              <li><a href="#">Papayaya & Crisps</a></li>
-              <li><a href="#">Oatmeal</a></li>
+              <li><a style="cursor: pointer;" (click)="getAllProducts()">All</a></li>
+              <li *ngFor="let c of categories"><a style="cursor: pointer;" (click)="getSelectedCategoryProducts(c['categoryId'])">{{c["categoryName"]}}</a></li>
             </ul>
           </div>
         </div>
@@ -26,7 +18,7 @@
           <div class="row">
             <div class="col-lg-4 col-md-4">
               <div class="filter__found">
-                <h6><span>16</span> Products found</h6>
+                <h6><span>{{products.length}}</span> Products found</h6>
               </div>
             </div>
           </div>
@@ -39,19 +31,17 @@
               <div
                 class="product__item__pic set-bg"
                 [attr.data-setbg]="'Resources/Products/' + p['productImagePath']"
-                (click)="goToProduct(p['productId'])"
               >
 
                 <ul class="product__item__pic__hover" >
                   <li>
-                    <a href="#" (click)="addToCart(p['productId'])"><i class="fa fa-shopping-cart"></i></a>
+                    <a (click)="addToCart(p['productId'])" style="cursor: pointer;"><i  class="fa fa-shopping-cart"></i></a>
                   </li>
                 </ul>
               </div>
-              <div class="product__item__text" (click)="goToProduct(p['productId'])">
-                <h6><a href="#">{{p["productName"]}}</a></h6>
+              <div class="product__item__text" style="cursor: pointer;" (click)="goToProduct(p['productId'])">
+                <h6><a>{{p["productName"]}}</a></h6>
                 <h5>Rs {{p["price"]}}</h5>
-                <!-- {productId: 2, categoryName: 'Category 1', productName: 'White Sugar', description: 'test description', price: 1222, …} -->
               </div>
             </div>  
           </div>

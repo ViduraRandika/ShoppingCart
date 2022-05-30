@@ -12,5 +12,11 @@ namespace DataAccessLayer.Interfaces
             string customerPhoneNumber, string email, string password, int authLevelId);
 
         Task<List<User>> GetAllUsers();
+
+        Task<Cart> GetCartDetails(long userId, string status);
+
+        Task<Cart> OpenNewCart(long userId);
+
+        Task<bool> AddProductToCart(int productId, long cartId, int qty);
     }
 }

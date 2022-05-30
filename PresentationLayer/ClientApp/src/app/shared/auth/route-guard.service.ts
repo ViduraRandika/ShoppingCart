@@ -27,12 +27,16 @@ export class RouteGuardService implements CanActivate {
         let role = tokenPayload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
     
         if(role !== expectedRole){
-          this.router.navigate(['home']);
+          this.router.navigate(['login']);
           return false;
         }
+
+        return true;
+      }else{
+        this.router.navigate(['login']);
+        return false;
       }
 
-      return false;
 
       // return true;
     }

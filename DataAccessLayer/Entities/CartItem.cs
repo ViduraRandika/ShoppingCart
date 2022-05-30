@@ -12,9 +12,7 @@ namespace DataAccessLayer.Entities
 
         public Cart Cart { get; set; }
         [Required] public long CartId { get; set; }
-
-        [Required] public float Price { get; set; }
-
+        
         [Required] public int Qty { get; set; }
     }
 }

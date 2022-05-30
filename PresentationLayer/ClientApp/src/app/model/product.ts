@@ -4,4 +4,5 @@ export interface Product {
 	price: number
 	productImagePath: string
 	productName: string
+	productId:number
 }

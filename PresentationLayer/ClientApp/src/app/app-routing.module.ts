@@ -37,7 +37,7 @@ const routes: Routes = [
   {
     path: 'admin',
     redirectTo: 'admin/dashboard',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'admin',
@@ -45,23 +45,39 @@ const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        component: AdminNavLayoutComponent
+        component: AdminNavLayoutComponent,
+        canActivate: [RouteGuardService],
+        data: {
+          expectedRole: "admin"
+        }
       },
       {
         path: 'create-category',
-        component: CreateCategoryComponent
+        component: CreateCategoryComponent,
+        data: {
+          expectedRole: "admin"
+        }
       },
       {
         path: 'view-categories',
-        component: ViewCategoriesComponent
+        component: ViewCategoriesComponent,
+        data: {
+          expectedRole: "admin"
+        }
       },
       {
         path: 'add-product',
-        component: AddProductComponent
+        component: AddProductComponent,
+        data: {
+          expectedRole: "admin"
+        }
       },
       {
         path: 'view-products',
-        component: ViewProductsComponent
+        component: ViewProductsComponent,
+        data: {
+          expectedRole: "admin"
+        }
       },
     ]
   },

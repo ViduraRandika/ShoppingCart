@@ -10,12 +10,9 @@ export class AuthService {
 
   public isAuthenticated(): boolean{
     const auth_token = localStorage.getItem("jwt")
-    console.log("1:    "+auth_token)
     if(auth_token){
       let exp = !this.jwtHelper.isTokenExpired(auth_token);
-      console.log(exp);
       return exp;
-
     }
     
     return false;
@@ -32,10 +29,33 @@ export class AuthService {
         pno: tokenPayload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/mobilephone"],
         name: tokenPayload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"],
         address:tokenPayload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/streetaddress"],
+        userId:parseFloat(tokenPayload["http://schemas.microsoft.com/ws/2008/06/identity/claims/userdata"]),
       }
       return obj;
     }
 
     return {};
+  }
+
+  public customerAuthorization(): boolean{
+    const expectedRole = "customer"
+    const auth_token = localStorage.getItem("jwt");
+
+    if(auth_token){
+      if(!this.isAuthenticated()){
+        return false;
+      }
+
+      const tokenPayload : any = decode(auth_token);
+      let role = tokenPayload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+  
+      if(role !== expectedRole){
+        return false;
+      }
+
+      return true;
+    }
+
+    return false;
   }
 }

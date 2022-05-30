@@ -38,5 +38,37 @@ namespace LogicLayer.UserLogic
             Console.Write(logins);
             return logins;
         }
+        public async Task<bool> AddProductToCart(int productId, long userID, int qty)
+        {
+            var cart = await _user.GetCartDetails(userID, "open");
+            long cartId;
+            if (cart == null)
+            {
+                var res = await _user.OpenNewCart(userID);
+                if (res == null)
+                {
+                    return false;
+                }
+
+                cartId = res.CartId;
+            }
+            else
+            {
+                cartId = cart.CartId;
+            }
+
+            
+
+            var result = await _user.AddProductToCart(productId, cartId, qty);
+
+            if (result)
+            {
+                return true;
+            }
+
+
+            return false;
+        }
+        
     }
 }

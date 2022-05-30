@@ -72,5 +72,21 @@ namespace PresentationLayer.API
 
             return BadRequest();
         }
+
+
+        [Route("addProductToCart")]
+        [HttpPost]
+        public IActionResult addToCart(int produtctId, long userID, int qty)
+        {
+            var res = userLogic.AddProductToCart(produtctId, userID, qty);
+
+            if (res.Result)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
     }
 }

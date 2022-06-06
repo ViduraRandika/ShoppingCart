@@ -59,6 +59,26 @@ export class UserService {
       )
   }
 
+  getCartItems(userId:number){
+    return this.http
+      .get(`/api/user/getCartItems`,{responseType:'json'})
+      .pipe(
+        catchError(
+          this.handleError
+        )
+      )
+  }
+
+  updateCartItemQty(id:number, qty:number){
+    return this.http
+      .post('/api/user/updateCartItems?id='+id+'&qty='+qty,null,{responseType:'json'})
+      .pipe(
+        catchError(
+          this.handleError
+        )
+      )
+  }
+
   handleError(error: any){
     let errorMessage = '';
     console.log(error)

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using DataAccessLayer.Entities;
 using LogicLayer.GenaralLogics;
 using LogicLayer.UserLogic;
+using LogicLayer.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using PresentationLayer.Models.ReqModels;
 
@@ -79,6 +80,29 @@ namespace PresentationLayer.API
         public IActionResult addToCart(int produtctId, long userID, int qty)
         {
             var res = userLogic.AddProductToCart(produtctId, userID, qty);
+
+            if (res.Result)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
+        [Route("getCartItems")]
+        [HttpGet]
+        // [Authorize(Roles = "admin")]
+        public async Task<List<CartItemsViewModel>> GetCartItems()
+        {
+            var cartItems= await userLogic.GetCartItems(12);
+            return cartItems;
+        }
+
+        [Route("updateCartItems")]
+        [HttpPost]
+        public IActionResult updateCartItemQty(long id, int qty)
+        {
+            var res = userLogic.UpdateCarteItemQty(id, qty);
 
             if (res.Result)
             {

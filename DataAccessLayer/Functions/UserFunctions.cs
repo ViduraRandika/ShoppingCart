@@ -63,7 +63,7 @@ namespace DataAccessLayer.Functions
               cart = context.Carts.Single(c => c.UserId == userID && c.Status == status);
               return cart;
           }
-          catch (Exception e)
+          catch (Exception)
           {
               return null;
           }
@@ -86,7 +86,7 @@ namespace DataAccessLayer.Functions
 
               return newCart;
           }
-          catch (Exception e)
+          catch (Exception)
           {
               return null;
           }
@@ -101,7 +101,7 @@ namespace DataAccessLayer.Functions
           {
               cartItem = context.CartItems.Single(c => c.CartId == cartId && c.ProductId == productId);
           }
-          catch (Exception e)
+          catch (Exception)
           {
               cartItem = null;
           }
@@ -130,11 +130,53 @@ namespace DataAccessLayer.Functions
 
               return true;
           }
-          catch (Exception e)
+          catch (Exception)
           {
               return false;
           }
 
+      }
+
+      public async Task<bool> UpdateCartItemQty(long id, int qty)
+      {
+          var context = new DatabaseContext(DatabaseContext.ops.dbOptions);
+
+          var cartItem = new CartItem();
+          try
+          {
+              cartItem = context.CartItems.Single(c => c.Id == id);
+          }
+          catch (Exception)
+          {
+              cartItem = null;
+          }
+
+          try
+          {
+              if (cartItem == null)
+              {
+                  return false;
+              }
+              cartItem.Qty = qty;
+              context.SaveChangesAsync();
+
+              return true;
+          }
+          catch (Exception)
+          {
+              return false;
+          }
+      }
+
+      public async Task<List<CartItem>> GetCartItems(long userId, long cartId)
+      {
+          var context = new DatabaseContext(DatabaseContext.ops.dbOptions);
+
+          List<CartItem> cartItems = new List<CartItem>();
+
+
+          cartItems = await context.CartItems.Where(c => c.CartId == cartId).Include(i => i.Product).ToListAsync();
+          return cartItems;
       }
     }
 }

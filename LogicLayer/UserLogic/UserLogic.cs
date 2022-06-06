@@ -5,6 +5,7 @@ using DataAccessLayer.Entities;
 using DataAccessLayer.Functions;
 using DataAccessLayer.Interfaces;
 using LogicLayer.AuthLogic;
+using LogicLayer.ViewModels;
 
 namespace LogicLayer.UserLogic
 {
@@ -69,6 +70,46 @@ namespace LogicLayer.UserLogic
 
             return false;
         }
-        
+
+        public async Task<bool> UpdateCarteItemQty(long id, int qty)
+        {
+            return await _user.UpdateCartItemQty(id, qty);
+        }
+
+        public async Task<List<CartItemsViewModel>> GetCartItems(long userID)
+        {
+            var cart = await _user.GetCartDetails(userID, "open");
+            if (cart != null)
+            {
+                var cartId = cart.CartId;
+                var cartItems = await _user.GetCartItems(userID, cartId);
+
+                List<CartItemsViewModel> cartItemsList = new List<CartItemsViewModel>();
+
+                if (cartItems.Count > 0)
+                {
+                    foreach (var items in cartItems)
+                    {
+                        CartItemsViewModel currentItem = new CartItemsViewModel
+                        {
+                            Id = items.Id,
+                            CartId = items.CartId,
+                            ProductName = items.Product.ProductName,
+                            Price = items.Product.Price,
+                            ProductId = items.Product.ProductId,
+                            Qty = items.Qty
+                        };
+
+                        cartItemsList.Add(currentItem);
+                    }
+
+                    return cartItemsList;
+                }
+                return null;
+            }
+
+            return null;
+        }
+
     }
 }

@@ -1,16 +1,11 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.IO;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using DataAccessLayer.Functions;
 using LogicLayer.AdminLogic;
-using LogicLayer.GenaralLogics;
-using LogicLayer.ViewModels;
+using LogicLayer.AuthLogic;
+using LogicLayer.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using PresentationLayer.Models.ReqModels;
 
 namespace PresentationLayer.API
@@ -22,6 +17,12 @@ namespace PresentationLayer.API
 
 
         private readonly AdminLogic _adminLogic = new AdminLogic();
+        private readonly IAuthLogic authLogic;
+
+        public AdminAPI_Controller(IAuthLogic authLogic)
+        {
+            this.authLogic = authLogic;
+        }
 
         [Route("create-category")]
         [HttpPost]
@@ -95,6 +96,17 @@ namespace PresentationLayer.API
             }
         }
 
-        
+
+        [Route("test")]
+        [HttpGet]
+        public IActionResult TestToken()
+        {
+            var context = HttpContext;
+            var res = authLogic.GetUserDataFromToken(context);
+
+            return Ok(res);
+        }
+
+
     }
 }

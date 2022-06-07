@@ -1,12 +1,15 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text;
 using DataAccessLayer.Functions;
 using DataAccessLayer.Interfaces;
 using LogicLayer.Interfaces;
+using LogicLayer.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Net.Http.Headers;
 
 namespace LogicLayer.AuthLogic
 {
@@ -68,6 +71,38 @@ namespace LogicLayer.AuthLogic
 
             string ftoken = tokenHandler.WriteToken(token);
             return ftoken;
+        }
+
+        public UserTokenDataViewModel GetUserDataFromToken(HttpContext context)
+        {
+            try
+            {
+                
+                var authorization = context.Request.Headers[HeaderNames.Authorization];
+                if (AuthenticationHeaderValue.TryParse(authorization, out var headerValue))
+                {
+                    var parameter = headerValue.Parameter;
+                    var handler = new JwtSecurityTokenHandler();
+                    var token = handler.ReadJwtToken(parameter);
+
+                    var userData = new UserTokenDataViewModel();
+
+                    userData.UserId = long.Parse(token.Payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/userdata"].ToString());
+                    userData.Email = token.Payload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"].ToString();
+                    userData.Name = token.Payload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"].ToString();
+                    userData.Address = token.Payload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/streetaddress"].ToString();
+                    userData.MobileNo = token.Payload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/mobilephone"].ToString();
+                    userData.Role = token.Payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"].ToString();
+
+                    return userData;
+                }
+
+                return null;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

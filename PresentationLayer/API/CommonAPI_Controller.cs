@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using DataAccessLayer.Entities;
 using LogicLayer.GenaralLogics;
 using LogicLayer.ViewModels;
 using Microsoft.AspNetCore.Mvc;

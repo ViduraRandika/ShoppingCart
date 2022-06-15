@@ -49,9 +49,9 @@ export class UserService {
       )
   }
 
-  addProductToCart(productId:number,userId:number,qty:number){
+  addProductToCart(productId:number,qty:number){
     return this.http
-      .post('/api/user/addProductToCart?produtctId='+productId+'&userID='+userId+'&qty='+qty,null,{responseType:'json'})
+      .post('/api/user/addProductToCart?produtctId='+productId+'&qty='+qty,null,{responseType:'json'})
       .pipe(
         catchError(
           this.handleError
@@ -59,7 +59,7 @@ export class UserService {
       )
   }
 
-  getCartItems(userId:number){
+  getCartItems(){
     return this.http
       .get(`/api/user/getCartItems`,{responseType:'json'})
       .pipe(

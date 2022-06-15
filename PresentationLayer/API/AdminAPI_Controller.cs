@@ -44,7 +44,7 @@ namespace PresentationLayer.API
 
         [Route("add-product")]
         [HttpPost]
-        // [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
 
         public async Task<IActionResult> AddNewProduct([FromBody] RCreateProduct product)
         {
@@ -62,6 +62,7 @@ namespace PresentationLayer.API
 
         [Route("uploadProductImage")]
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Upload()
         {
             try
@@ -94,17 +95,6 @@ namespace PresentationLayer.API
             {
                 return StatusCode(500, $"Internal server error: {ex}");
             }
-        }
-
-
-        [Route("test")]
-        [HttpGet]
-        public IActionResult TestToken()
-        {
-            var context = HttpContext;
-            var res = authLogic.GetUserDataFromToken(context);
-
-            return Ok(res);
         }
 
 

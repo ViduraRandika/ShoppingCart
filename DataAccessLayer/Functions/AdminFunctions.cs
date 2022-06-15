@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using DataAccessLayer.DataContext;
 using DataAccessLayer.Entities;
 using DataAccessLayer.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Functions
 {

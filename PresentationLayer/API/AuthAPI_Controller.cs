@@ -1,12 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using LogicLayer.AuthLogic;
+﻿using Microsoft.AspNetCore.Mvc;
 using LogicLayer.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using PresentationLayer.Models;
 using PresentationLayer.Models.ReqModels;
 
 namespace PresentationLayer.API

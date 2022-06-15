@@ -39,9 +39,7 @@ export class ProoductDetailsComponent implements OnInit {
 
   addToCart(id:number, qty:number){
     if(this.authService.customerAuthorization()){
-      var data :  any = this.authService.getUserDetails();
-      var userId = data["userId"]
-      this.service.addProductToCart(id,userId,qty).subscribe((data:{}) => {
+      this.service.addProductToCart(id,qty).subscribe((data:{}) => {
         window.alert("Product added to cart successfully");
       });
     }else{

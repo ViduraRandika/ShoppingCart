@@ -28,19 +28,17 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   getCartItems(){
-    // if(this.authService.customerAuthorization()){
-      var data :  any = this.authService.getUserDetails();
-      var userId = data["userId"];
-      this.service.getCartItems(userId).subscribe((data: {}) => {
+    if(this.authService.customerAuthorization()){
+      this.service.getCartItems().subscribe((data: {}) => {
         this.cartItemsTemp = data;
         for(var i = 0; i<this.cartItemsTemp.length; i++){
           var temp:CartItem = this.cartItemsTemp[i];
           this.cartItems.push(temp);
         }
       });
-    // }else{
-    //   alert("Please log in to perform this action.")
-    // }
+    }else{
+      alert("Please log in to perform this action.")
+    }
   }
 
   cartItemTotal(qty:string, price: number){

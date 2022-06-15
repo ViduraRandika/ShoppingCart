@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using DataAccessLayer.Entities;
+﻿using DataAccessLayer.Entities;
 
 namespace DataAccessLayer.Interfaces
 {

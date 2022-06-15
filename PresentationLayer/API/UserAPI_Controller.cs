@@ -1,11 +1,9 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Net;
-using System.Net.Mail;
 using System.Threading.Tasks;
 using DataAccessLayer.Entities;
 using LogicLayer.GenaralLogics;
+using LogicLayer.Interfaces;
 using LogicLayer.UserLogic;
 using LogicLayer.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -18,6 +16,7 @@ namespace PresentationLayer.API
     public class UserAPI_Controller : ControllerBase
     {
         private readonly UserLogic userLogic = new UserLogic();
+        private readonly IAuthLogic authLogic;
         private readonly SendEmailLogic sendEmailLogic = new SendEmailLogic();
 
 
@@ -54,7 +53,7 @@ namespace PresentationLayer.API
             return users;
         }
 
-
+        [AllowAnonymous]
         [Route("sendContactUsMsg")]
         [HttpPost]
         public IActionResult sendMail([FromBody] RContact contact)
@@ -77,8 +76,12 @@ namespace PresentationLayer.API
 
         [Route("addProductToCart")]
         [HttpPost]
-        public IActionResult addToCart(int produtctId, long userID, int qty)
+        [Authorize(Roles = "customer")]
+        public IActionResult addToCart(int produtctId, int qty)
         {
+            var context = HttpContext;
+            var res_u = authLogic.GetUserDataFromToken(context);
+            long userID = res_u.UserId;
             var res = userLogic.AddProductToCart(produtctId, userID, qty);
 
             if (res.Result)
@@ -91,15 +94,19 @@ namespace PresentationLayer.API
 
         [Route("getCartItems")]
         [HttpGet]
-        // [Authorize(Roles = "admin")]
+        [Authorize(Roles = "customer")]
         public async Task<List<CartItemsViewModel>> GetCartItems()
         {
-            var cartItems= await userLogic.GetCartItems(12);
+            var context = HttpContext;
+            var res_u = authLogic.GetUserDataFromToken(context);
+            long userID = res_u.UserId;
+            var cartItems= await userLogic.GetCartItems(userID);
             return cartItems;
         }
 
         [Route("updateCartItems")]
         [HttpPost]
+        [Authorize(Roles = "customer")]
         public IActionResult updateCartItemQty(long id, int qty)
         {
             var res = userLogic.UpdateCarteItemQty(id, qty);

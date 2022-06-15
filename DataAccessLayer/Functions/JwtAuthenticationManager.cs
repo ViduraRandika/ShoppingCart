@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using DataAccessLayer.DataContext;
 using DataAccessLayer.Entities;
 using DataAccessLayer.Interfaces;

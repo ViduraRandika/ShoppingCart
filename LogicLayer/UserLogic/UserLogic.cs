@@ -111,5 +111,34 @@ namespace LogicLayer.UserLogic
             return null;
         }
 
+        public async Task<bool> RemoveProductFromCart(int productId, long userID)
+        {
+            var cart = await _user.GetCartDetails(userID, "open");
+            long cartId;
+            if (cart == null)
+            {
+                var res = await _user.OpenNewCart(userID);
+                if (res == null)
+                {
+                    return false;
+                }
+
+                cartId = res.CartId;
+            }
+            else
+            {
+                cartId = cart.CartId;
+            }
+
+            var result = await _user.RemoveProductFromCart(productId, cartId);
+
+            if (result)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
     }
 }

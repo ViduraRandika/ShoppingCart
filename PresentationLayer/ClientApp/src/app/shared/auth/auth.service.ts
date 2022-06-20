@@ -40,7 +40,6 @@ export class AuthService {
   public customerAuthorization(): boolean{
     const expectedRole = "customer"
     const auth_token = localStorage.getItem("jwt");
-
     if(auth_token){
       if(!this.isAuthenticated()){
         return false;

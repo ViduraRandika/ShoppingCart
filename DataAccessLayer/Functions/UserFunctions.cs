@@ -178,5 +178,24 @@ namespace DataAccessLayer.Functions
           cartItems = await context.CartItems.Where(c => c.CartId == cartId).Include(i => i.Product).ToListAsync();
           return cartItems;
       }
+
+      public async Task<bool>  RemoveProductFromCart(int productId, long cartId)
+        {
+            var context = new DatabaseContext(DatabaseContext.ops.dbOptions);
+
+            var cartItem = new CartItem();
+            try
+            {
+                cartItem = context.CartItems.Single(c => c.CartId == cartId && c.ProductId == productId);
+                context.Remove(cartItem);
+                context.SaveChangesAsync();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }

@@ -17,6 +17,8 @@ namespace DataAccessLayer.Interfaces
 
         Task<bool> AddProductToCart(int productId, long cartId, int qty);
 
+        Task<bool> RemoveProductFromCart(int productId, long cartId);
+
         Task<List<CartItem>> GetCartItems(long userId, long cartId);
 
         public Task<bool> UpdateCartItemQty(long id, int qty);

@@ -64,6 +64,11 @@ export class ShoppingCartComponent implements OnInit {
   updateQtyDatabase(id:number,qty:number){
     this.service.updateCartItemQty(id,qty).subscribe();
   }
+
+  removeItemFromCart(id:number,productId:number){
+    this.service.productRemoveFromCart(productId).subscribe();
+    this.cartItems.splice(id,1);
+  }
   
   public loadScript(url: string) {
     let node = document.createElement('script');

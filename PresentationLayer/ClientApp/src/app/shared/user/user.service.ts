@@ -79,6 +79,26 @@ export class UserService {
       )
   }
 
+  productRemoveFromCart(productId:number){
+    return this.http
+      .delete('/api/user/removeProductFromCart?productId='+productId,{responseType:'json'})
+      .pipe(
+        catchError(
+          this.handleError
+        )
+      )
+  }
+
+  testApi(){
+    return this.http
+      .get('/api/user/test',{responseType:'json'})
+      .pipe(
+        catchError(
+          this.handleError
+        )
+      )
+  }
+
   handleError(error: any){
     let errorMessage = '';
     console.log(error)

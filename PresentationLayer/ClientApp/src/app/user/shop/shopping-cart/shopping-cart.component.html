@@ -30,7 +30,7 @@
                 </td>
                 <td class="shoping__cart__total">Rs {{cartItemTotal(qty.value, e['price'])}}</td>
                 <td class="shoping__cart__item__close">
-                  <span class="icon_close"></span>
+                  <span class="icon_close" (click)="removeItemFromCart(i,e['productId'])"></span>
                 </td>
               </tr>
             </tbody>

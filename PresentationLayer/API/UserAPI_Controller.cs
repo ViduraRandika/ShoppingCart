@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DataAccessLayer.Entities;
@@ -19,6 +20,10 @@ namespace PresentationLayer.API
         private readonly IAuthLogic authLogic;
         private readonly SendEmailLogic sendEmailLogic = new SendEmailLogic();
 
+        public UserAPI_Controller(IAuthLogic authLogic)
+        {
+            this.authLogic = authLogic;
+        }
 
         [AllowAnonymous]
         [Route("add")]
@@ -92,6 +97,25 @@ namespace PresentationLayer.API
             return BadRequest();
         }
 
+        [Route("removeProductFromCart")]
+        [HttpDelete]
+        [Authorize(Roles = "customer")]
+        public IActionResult removeFromCart(int productId)
+        {
+            var context = HttpContext;
+            var res_u = authLogic.GetUserDataFromToken(context);
+            long userId = res_u.UserId;
+
+            var res = userLogic.RemoveProductFromCart(productId, userId);
+
+            if (res.Result)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
         [Route("getCartItems")]
         [HttpGet]
         [Authorize(Roles = "customer")]
@@ -118,6 +142,5 @@ namespace PresentationLayer.API
 
             return BadRequest();
         }
-
     }
 }

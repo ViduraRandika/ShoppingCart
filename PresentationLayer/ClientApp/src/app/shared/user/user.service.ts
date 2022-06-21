@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
-
+import Swal from 'sweetalert2'
 @Injectable({
   providedIn: 'root'
 })
@@ -108,6 +108,12 @@ export class UserService {
       errorMessage = `Something went wront. Please try again.`
     }
 
+    // Swal.fire({
+    //   title: 'Error!',
+    //   text: errorMessage,
+    //   icon: 'error',
+    //   confirmButtonText: 'Close'
+    // })
     window.alert(errorMessage);
 
     return throwError(() => {

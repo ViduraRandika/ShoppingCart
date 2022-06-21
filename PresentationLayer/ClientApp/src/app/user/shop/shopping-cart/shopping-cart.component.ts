@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartItem } from 'src/app/model/cartItem';
 import { AuthService } from 'src/app/shared/auth/auth.service';
 import { UserService } from 'src/app/shared/user/user.service';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-shopping-cart',
@@ -25,6 +26,8 @@ export class ShoppingCartComponent implements OnInit {
     this.loadScript("assets/user/js/mixitup.min.js");
     this.loadScript("assets/user/js/owl.carousel.min.js");
     this.loadScript("assets/user/js/main.js");
+
+    
   }
 
   getCartItems(){
@@ -37,7 +40,16 @@ export class ShoppingCartComponent implements OnInit {
         }
       });
     }else{
-      alert("Please log in to perform this action.")
+      Swal.fire({
+        title: 'Error!',
+        text: 'Please login to perform this action',
+        icon: 'error',
+        confirmButtonText: 'Login',
+        allowEscapeKey: false,
+        allowOutsideClick: false
+      }).then(function(){
+        window.location.href = "/login";
+      })
     }
   }
 

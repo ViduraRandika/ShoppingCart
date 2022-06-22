@@ -4,6 +4,7 @@ import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterService } from 'src/app/shared/auth/register/register.service';
 import Validation from 'src/app/shared/auth/register/validation.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -91,7 +92,22 @@ export class RegisterComponent implements OnInit {
   // formData:Register
   onSubmit(formData:any){
     this.service.addCustomer(formData).subscribe((data: {}) => {
-      window.alert("Account created successfully. Please log in")
+      const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+
+        Toast.fire({
+          icon: 'success',
+          title: 'Account created successfully. Please log in'
+        })
       this.router.navigate(['/login']);
     });
   }

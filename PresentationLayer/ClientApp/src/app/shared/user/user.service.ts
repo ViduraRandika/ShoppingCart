@@ -153,7 +153,6 @@ export class UserService {
         text: errorMessage,
         icon: 'error',
       })
-    // window.alert(errorMessage);
 
     return throwError(() => {
       return errorMessage;

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth/auth.service';
 import { UserService } from 'src/app/shared/user/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product-list',
@@ -60,7 +61,22 @@ export class ProductListComponent implements OnInit {
   addToCart(id:number){
     if(this.authService.customerAuthorization()){
       this.service.addProductToCart(id,1).subscribe((data:{}) => {
-        window.alert("Product added to cart successfully");
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+
+        Toast.fire({
+          icon: 'success',
+          title: 'Product added to cart successfully'
+        })
       });
     }else{
       alert("Please log in to perform this action.")

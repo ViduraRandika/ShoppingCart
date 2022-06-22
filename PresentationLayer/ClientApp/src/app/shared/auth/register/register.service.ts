@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of, throwError } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,11 @@ export class RegisterService {
       }
     }
 
-    window.alert(errorMessage);
+    Swal.fire({
+      title: 'Error!',
+      text: errorMessage,
+      icon: 'error',
+    })
 
     return throwError(() => {
       return errorMessage;

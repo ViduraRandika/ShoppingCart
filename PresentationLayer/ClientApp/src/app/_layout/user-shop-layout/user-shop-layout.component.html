@@ -61,8 +61,11 @@
               <a><i class="fa fa-facebook"></i></a>
               <a><i class="fa fa-instagram"></i></a>
             </div>
-            <div class="header__top__right__auth">
-              <a (click)="navigate(login_href)" style="cursor: pointer;"><i class="fa fa-user"></i>{{login}}</a>
+            <div class="header__top__right__language">
+                <div (click)="navigate(login_href)"> <i class="fa fa-user"></i> {{login}}</div>
+            </div>
+            <div class="header__top__right__auth" *ngIf="logOutFlag">
+              <a (click)="logout()" style="cursor: pointer;">Logout</a>
             </div>
           </div>
         </div>

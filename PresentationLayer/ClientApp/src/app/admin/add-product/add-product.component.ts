@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/shared/admin/admin.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-product',
@@ -115,9 +116,23 @@ export class AddProductComponent implements OnInit {
 
     this.service.postAddProduct(data)
       .subscribe((res) => {
-        window.alert("Product added successfullty");
-      })
+       const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
 
+        Toast.fire({
+          icon: 'success',
+          title: 'Product added successfullty'
+        })
+      })
   }
 
 

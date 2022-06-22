@@ -18,7 +18,7 @@ export class UserShopLayoutComponent implements OnInit {
   login_href: string;
   cartItemsCount : any;
   cartTotal : number;
-
+  logOutFlag:boolean;
   cartItemsTemp:any;
   cartItems:any= [];
 
@@ -43,9 +43,11 @@ export class UserShopLayoutComponent implements OnInit {
       var user_details : any = this.authService.getUserDetails();
       this.login = user_details['name']
       this.login_href = "#"
+      this.logOutFlag = true;
     }else{
       this.login = "Login"
       this.login_href = "/login"
+      this.logOutFlag = false;
     }
 
     this.getCartDetails();
@@ -82,6 +84,11 @@ export class UserShopLayoutComponent implements OnInit {
     node.src = url;
     node.type = 'text/javascript';
     document.getElementsByTagName('body')[0].appendChild(node);
+  }
+
+  logout(){
+    localStorage.removeItem("jwt");
+    this.navigate('/login');
   }
 
   navigate(url:string){

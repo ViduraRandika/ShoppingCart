@@ -113,7 +113,7 @@ export class ShoppingCartComponent implements OnInit {
       }
     })
   }
-
+  
   navigate(url:string){
     this.router.navigate(
       [url]

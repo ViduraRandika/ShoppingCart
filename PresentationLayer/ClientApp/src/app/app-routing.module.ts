@@ -18,6 +18,7 @@ import { UserShopLayoutComponent } from './_layout/user-shop-layout/user-shop-la
 import { ProoductDetailsComponent } from './user/shop/prooduct-details/prooduct-details.component';
 import { ContactComponent } from './user/contact/contact.component';
 import { ShoppingCartComponent } from './user/shop/shopping-cart/shopping-cart.component';
+import { MyOrdersComponent } from './user/my-orders/my-orders.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'test', component: TestComponent },
@@ -113,6 +114,14 @@ const routes: Routes = [
       {
         path:'shop/shopping-cart',
         component: ShoppingCartComponent,
+        canActivate: [RouteGuardService],
+        data:{
+          expectedRole: "customer"
+        }
+      },
+      {
+        path:'my-orders',
+        component: MyOrdersComponent,
         canActivate: [RouteGuardService],
         data:{
           expectedRole: "customer"

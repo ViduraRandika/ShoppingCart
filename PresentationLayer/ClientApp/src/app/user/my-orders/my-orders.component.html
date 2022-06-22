@@ -1,0 +1,37 @@
+<section class="shoping-cart spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="shoping__cart__table">
+          <table>
+            <thead>
+              <tr>
+                <th>Order Id</th>
+                <th>Total (Rs)</th>
+                <th>Order Date</th>
+                <th>View Bill</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let e of orders; let i = index">
+                <td>
+                  	<h5>{{e['orderId']}}</h5>
+                </td>
+                <td>
+					<h5>{{e['grandTotal']}}</h5>
+				</td>
+                <td>
+					<h5>{{e['ordereDateAndTime']}}</h5>
+				</td>
+                <td>
+					<a style="cursor: pointer; color:blue; text-decoration: underline;" (click)="viewBill(e['orderId'])">View Bill</a>
+				</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Shoping Cart Section End -->

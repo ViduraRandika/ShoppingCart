@@ -30,7 +30,8 @@ import { UserShopLayoutComponent } from './_layout/user-shop-layout/user-shop-la
 import { ProoductDetailsComponent } from './user/shop/prooduct-details/prooduct-details.component';
 import { ShoppingCartComponent } from './user/shop/shopping-cart/shopping-cart.component';
 import { ContactComponent } from './user/contact/contact.component';
-import { MyOrdersComponent } from './user/my-orders/my-orders/my-orders.component';
+import { MyOrdersComponent } from './user/my-orders/my-orders.component';
+import { ViewBillComponent } from './user/view-bill/view-bill.component';
 
 const JWT_Module_Options: JwtModuleOptions = {
     config: {
@@ -65,6 +66,7 @@ export function tokenGetter() {
     ShoppingCartComponent,
     ContactComponent,
     MyOrdersComponent,
+    ViewBillComponent,
   ],
   imports: [
     BrowserModule,

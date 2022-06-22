@@ -14,7 +14,7 @@ export class ShoppingCartComponent implements OnInit {
   cartItemsTemp:any;
   cartItems:any= [];
 
-  constructor(private authService: AuthService, private service: UserService) { }
+  constructor(private service: UserService) { }
 
   ngOnInit(): void {
     this.getCartItems();

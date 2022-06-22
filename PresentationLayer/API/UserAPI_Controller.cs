@@ -161,5 +161,18 @@ namespace PresentationLayer.API
 
             return BadRequest();
         }
+
+        [Route("my-orders")]
+        [HttpGet]
+        [Authorize(Roles = "customer")]
+
+        public async Task<List<OrderListViewModel>> GetOrders()
+        {
+            var context = HttpContext;
+            var res_u = authLogic.GetUserDataFromToken(context);
+            long userID = res_u.UserId;
+            var orders = await userLogic.GetOrderList(userID);
+            return orders;
+        }
     }
 }

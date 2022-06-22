@@ -99,6 +99,16 @@ export class UserService {
       )
   }
 
+  getOrders(){
+    return this.http
+      .get('/api/user/my-orders',{responseType:'json'})
+      .pipe(
+        catchError(
+          this.handleError
+        )
+      )
+  }
+
   testApi(){
     return this.http
       .get('/api/user/test',{responseType:'json'})

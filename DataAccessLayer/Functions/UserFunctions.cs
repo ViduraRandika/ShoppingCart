@@ -179,7 +179,18 @@ namespace DataAccessLayer.Functions
           return cartItems;
       }
 
-      public async Task<bool>  RemoveProductFromCart(int productId, long cartId)
+      public async Task<List<Order>> GetOrders(long userId)
+      {
+          var context = new DatabaseContext(DatabaseContext.ops.dbOptions);
+
+          List<Order> orders = new List<Order>();
+
+
+          orders = await context.Orders.Where(c => c.CustomerId == userId).ToListAsync();
+          return orders;
+      }
+
+        public async Task<bool>  RemoveProductFromCart(int productId, long cartId)
         {
             var context = new DatabaseContext(DatabaseContext.ops.dbOptions);
 

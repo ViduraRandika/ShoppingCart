@@ -149,9 +149,10 @@ namespace LogicLayer.UserLogic
                 return false;
             }
 
-            var utc = DateTime.UtcNow;
+            DateTime foo = DateTime.Now;
+            long unixTime = ((DateTimeOffset)foo).ToUnixTimeSeconds();
             long cartId = cart.CartId;
-            var result = await _user.PlaceOrder(userID, cartId, total, utc);
+            var result = await _user.PlaceOrder(userID, cartId, total, foo);
 
             if (result)
             {
@@ -159,6 +160,35 @@ namespace LogicLayer.UserLogic
             }
 
             return false;
+        }
+
+        public async Task<List<OrderListViewModel>> GetOrderList(long userID)
+        {
+
+            var orders = await _user.GetOrders(userID);
+            List<OrderListViewModel> ordersList = new List<OrderListViewModel>();
+
+            if (orders.Count > 0)
+            {
+                foreach (var items in orders)
+                {
+                    OrderListViewModel currentItem = new OrderListViewModel()
+                    {
+                        OrderId = items.OrderId,
+                        CustomerId = items.CustomerId,
+                        GrandTotal = items.GrandTotal,
+                        CartId = items.CartId,
+                        Status = items.Status,
+                        OrdereDateAndTime = items.OrdereDateAndTime
+                    };
+
+                    ordersList.Add(currentItem);
+                }
+
+                return ordersList;
+            }
+
+            return null;
         }
     }
 }

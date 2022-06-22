@@ -197,5 +197,33 @@ namespace DataAccessLayer.Functions
                 return false;
             }
         }
+
+      public async Task<bool> PlaceOrder(int userID, long cartId, float total, DateTime dateTime)
+      {
+          var context = new DatabaseContext(DatabaseContext.ops.dbOptions);
+
+          try
+          {
+              var cart = context.Carts.Single(c => c.UserId == userID && c.Status == "open");
+              cart.Status = "close";
+
+              var order = new Order()
+              {
+                  CustomerId = userID,
+                  GrandTotal = total,
+                  CartId = cart.CartId,
+                  Status = "confirmed"
+              };
+
+              context.AddAsync(order);
+              context.SaveChangesAsync();
+              return true;
+          }
+          catch (Exception)
+          {
+              return false;
+          }
+
+        }
     }
 }

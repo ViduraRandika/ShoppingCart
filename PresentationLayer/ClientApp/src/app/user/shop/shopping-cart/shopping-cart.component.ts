@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartItem } from 'src/app/model/cartItem';
 import { AuthService } from 'src/app/shared/auth/auth.service';
 import { UserService } from 'src/app/shared/user/user.service';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -31,26 +31,13 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   getCartItems(){
-    if(this.authService.customerAuthorization()){
-      this.service.getCartItems().subscribe((data: {}) => {
-        this.cartItemsTemp = data;
-        for(var i = 0; i<this.cartItemsTemp.length; i++){
-          var temp:CartItem = this.cartItemsTemp[i];
-          this.cartItems.push(temp);
-        }
-      });
-    }else{
-      Swal.fire({
-        title: 'Error!',
-        text: 'Please login to perform this action',
-        icon: 'error',
-        confirmButtonText: 'Login',
-        allowEscapeKey: false,
-        allowOutsideClick: false
-      }).then(function(){
-        window.location.href = "/login";
-      })
-    }
+    this.service.getCartItems().subscribe((data: {}) => {
+      this.cartItemsTemp = data;
+      for(var i = 0; i<this.cartItemsTemp.length; i++){
+        var temp:CartItem = this.cartItemsTemp[i];
+        this.cartItems.push(temp);
+      }
+    });
   }
 
   cartItemTotal(qty:string, price: number){
@@ -87,5 +74,47 @@ export class ShoppingCartComponent implements OnInit {
     node.src = url;
     node.type = 'text/javascript';
     document.getElementsByTagName('body')[0].appendChild(node);
+  }
+
+  placeOrder(){
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "Please click on confirm button to place an order.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Confirm',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        
+        this.service.placeOrder(this.cartFullTotal()).subscribe(()=>{
+          Swal.fire({
+            title: 'Order placed !',
+            text: "Thank you for shopping with us",
+            icon: 'success',
+            allowOutsideClick:false,
+            allowEscapeKey:false,
+            confirmButtonText:'Continue'
+          }).then(function() {
+              window.location.href = "/user/my-orders";
+          });
+        });
+
+      }
+    })
+
+
+
+
+    
   }
 }

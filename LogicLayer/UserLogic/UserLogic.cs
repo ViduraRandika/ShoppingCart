@@ -140,5 +140,25 @@ namespace LogicLayer.UserLogic
             return false;
         }
 
+        public async Task<bool> PlaceOrder(int userID, long total)
+        {
+            var cart = await _user.GetCartDetails(userID, "open");
+
+            if (cart == null)
+            {
+                return false;
+            }
+
+            var utc = DateTime.UtcNow;
+            long cartId = cart.CartId;
+            var result = await _user.PlaceOrder(userID, cartId, total, utc);
+
+            if (result)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

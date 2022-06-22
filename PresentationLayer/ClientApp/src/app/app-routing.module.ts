@@ -54,6 +54,7 @@ const routes: Routes = [
       {
         path: 'create-category',
         component: CreateCategoryComponent,
+        canActivate: [RouteGuardService],
         data: {
           expectedRole: "admin"
         }
@@ -61,6 +62,7 @@ const routes: Routes = [
       {
         path: 'view-categories',
         component: ViewCategoriesComponent,
+        canActivate: [RouteGuardService],
         data: {
           expectedRole: "admin"
         }
@@ -68,6 +70,7 @@ const routes: Routes = [
       {
         path: 'add-product',
         component: AddProductComponent,
+        canActivate: [RouteGuardService],
         data: {
           expectedRole: "admin"
         }
@@ -75,6 +78,7 @@ const routes: Routes = [
       {
         path: 'view-products',
         component: ViewProductsComponent,
+        canActivate: [RouteGuardService],
         data: {
           expectedRole: "admin"
         }
@@ -108,7 +112,11 @@ const routes: Routes = [
       },
       {
         path:'shop/shopping-cart',
-        component: ShoppingCartComponent
+        component: ShoppingCartComponent,
+        canActivate: [RouteGuardService],
+        data:{
+          expectedRole: "customer"
+        }
       }
     ]
   },

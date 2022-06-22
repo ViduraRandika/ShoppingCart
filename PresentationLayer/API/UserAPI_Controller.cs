@@ -142,5 +142,24 @@ namespace PresentationLayer.API
 
             return BadRequest();
         }
+
+        [Route("placeOrder")]
+        [HttpPost]
+        [Authorize(Roles = "customer")]
+        public IActionResult placeOrder(long total)
+        {
+            var context = HttpContext;
+            var res_u = authLogic.GetUserDataFromToken(context);
+            int userID = Convert.ToInt32(res_u.UserId);
+
+            var res = userLogic.PlaceOrder(userID,total);
+
+            if (res.Result)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
     }
 }

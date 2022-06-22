@@ -89,6 +89,16 @@ export class UserService {
       )
   }
 
+  placeOrder(total:number){
+    return this.http
+      .post('/api/user/placeOrder?total='+total,null,{responseType:'json'})
+      .pipe(
+        catchError(
+          this.handleError
+        )
+      )
+  }
+
   testApi(){
     return this.http
       .get('/api/user/test',{responseType:'json'})
@@ -108,13 +118,12 @@ export class UserService {
       errorMessage = `Something went wront. Please try again.`
     }
 
-    // Swal.fire({
-    //   title: 'Error!',
-    //   text: errorMessage,
-    //   icon: 'error',
-    //   confirmButtonText: 'Close'
-    // })
-    window.alert(errorMessage);
+    Swal.fire({
+        title: 'Error!',
+        text: errorMessage,
+        icon: 'error',
+      })
+    // window.alert(errorMessage);
 
     return throwError(() => {
       return errorMessage;

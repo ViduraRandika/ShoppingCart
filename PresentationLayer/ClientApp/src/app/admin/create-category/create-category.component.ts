@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AdminService } from 'src/app/shared/admin/admin.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { AdminService } from 'src/app/shared/admin/admin.service';
 })
 export class CreateCategoryComponent implements OnInit {
 
-  constructor(public service: AdminService, private fb: FormBuilder) { }
+  constructor(public service: AdminService, private fb: FormBuilder, private router:Router) { }
 
   createCategoryForm = this.fb.group({
     categoryName: ['']
@@ -54,4 +55,9 @@ export class CreateCategoryComponent implements OnInit {
     document.getElementsByTagName('body')[0].appendChild(node);
   }
 
+  navigate(url:string){
+    this.router.navigate(
+      [url]
+    );
+  }
 }

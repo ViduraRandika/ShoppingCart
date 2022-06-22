@@ -235,6 +235,24 @@ namespace DataAccessLayer.Functions
               return false;
           }
 
-        }
+      }
+
+      public async Task<Order> GetBill(long orderId, long userId)
+      {
+          var context = new DatabaseContext(DatabaseContext.ops.dbOptions);
+
+          var order = new Order();
+          try
+          {
+              order = context.Orders.Single(c => c.OrderId == orderId && c.CustomerId == userId);
+
+              return order;
+          }
+          catch (Exception)
+          {
+              return null;
+
+          }
+      }
     }
 }

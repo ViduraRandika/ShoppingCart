@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AdminService } from 'src/app/shared/admin/admin.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class AddProductComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(public service: AdminService, private fb: FormBuilder) { }
+  constructor(public service: AdminService, private fb: FormBuilder, private router:Router) { }
 
   data: [];
   fileToUpload: any;
@@ -132,5 +133,11 @@ export class AddProductComponent implements OnInit {
     node.integrity = "$.widget.bridge('uibutton', $.ui.button)"
     node.type = 'text/javascript';
     document.getElementsByTagName('body')[0].appendChild(node);
+  }
+
+  navigate(url:string){
+    this.router.navigate(
+      [url]
+    );
   }
 }

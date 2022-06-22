@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-layout',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminLayoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
     this.loadScript("assets/plugins/jquery/jquery.min.js");
@@ -28,6 +29,12 @@ export class AdminLayoutComponent implements OnInit {
     node.integrity = "$.widget.bridge('uibutton', $.ui.button)"
     node.type = 'text/javascript';
     document.getElementsByTagName('body')[0].appendChild(node);
+  }
+
+  navigate(url:string){
+    this.router.navigate(
+      [url]
+    );
   }
 
 }

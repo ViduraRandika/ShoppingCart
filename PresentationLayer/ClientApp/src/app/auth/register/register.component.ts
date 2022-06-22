@@ -96,5 +96,11 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  navigate(url:string){
+    this.router.navigate(
+      [url]
+    );
+  }
+
 }
 

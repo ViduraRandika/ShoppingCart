@@ -114,7 +114,7 @@
 
 					<div class="text-center text-lg-start mt-4 pt-2">
 						<button type="submit" class="btn btn-primary btn-lg register-btn" [disabled]="registerForm.invalid">Regiister</button>
-						<p class="small fw-bold mt-2 pt-1 mb-0">Already have an account? <a href="/login" class="link-danger">Login</a></p>
+						<p class="small fw-bold mt-2 pt-1 mb-0">Already have an account? <a (click)="navigate('/login')" style="cursor: pointer;" class="link-danger">Login</a></p>
 					</div>
 				</form>
 			</div>

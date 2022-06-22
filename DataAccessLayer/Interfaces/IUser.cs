@@ -27,5 +27,7 @@ namespace DataAccessLayer.Interfaces
         Task<List<Order>> GetOrders(long userId);
 
         public Task<bool> UpdateCartItemQty(long id, int qty);
+
+        Task<Order> GetBill(long orderId, long userId);
     }
 }

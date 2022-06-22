@@ -1,1 +1,51 @@
-<p>view-bill works!</p>
+<section class="shoping-cart spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="shoping__cart__table">
+
+        <div *ngIf="billDetails == null" style="margin-top: 30px" class="card">
+            <div class="card-body">
+                <div class="card-title" style="text-align:center;font-size:16px;">
+                    Oops! Something went wrong.
+                </div>
+            </div>
+        </div>
+
+          <table *ngIf="billDetails != null">
+            <thead>
+              <tr>
+                <th class="shoping__product">Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let e of cartItems; let i = index">
+              
+                <td class="shoping__cart__item">
+                  <h5>{{e['productName']}}</h5>
+                </td>
+                <td class="shoping__cart__price">Rs {{e['price']}}</td>
+                <td class="shoping__cart__quantity">{{e['qty']}}</td>
+                <td class="shoping__cart__total">Rs {{cartItemTotal(e['qty'], e['price'])}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="billDetails != null">
+      <div class="col-lg-6">
+        <div class="shoping__checkout">
+          <ul>
+            <li style="font-size: xx-large;">Total Bill <span style="font-size: xx-large;">Rs {{billDetails.grandTotal}}</span></li>
+            <li style="font-size: medium;">Order Date <span style="font-size: medium; color: black;">{{dateTime}}</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

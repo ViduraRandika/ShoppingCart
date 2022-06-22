@@ -76,9 +76,9 @@ namespace LogicLayer.UserLogic
             return await _user.UpdateCartItemQty(id, qty);
         }
 
-        public async Task<List<CartItemsViewModel>> GetCartItems(long userID)
+        public async Task<List<CartItemsViewModel>> GetCartItems(long userID, string status)
         {
-            var cart = await _user.GetCartDetails(userID, "open");
+            var cart = await _user.GetCartDetails(userID, status);
             if (cart != null)
             {
                 var cartId = cart.CartId;
@@ -108,6 +108,34 @@ namespace LogicLayer.UserLogic
                 return null;
             }
 
+            return null;
+        }
+
+        public async Task<List<CartItemsViewModel>> GetCartItemsByCartId(long userID, long cartId)
+        {
+            var cartItems = await _user.GetCartItems(userID, cartId);
+
+            List<CartItemsViewModel> cartItemsList = new List<CartItemsViewModel>();
+
+            if (cartItems.Count > 0)
+            {
+                foreach (var items in cartItems)
+                {
+                    CartItemsViewModel currentItem = new CartItemsViewModel
+                    {
+                        Id = items.Id,
+                        CartId = items.CartId,
+                        ProductName = items.Product.ProductName,
+                        Price = items.Product.Price,
+                        ProductId = items.Product.ProductId,
+                        Qty = items.Qty
+                    };
+
+                    cartItemsList.Add(currentItem);
+                }
+
+                return cartItemsList;
+            }
             return null;
         }
 
@@ -186,6 +214,26 @@ namespace LogicLayer.UserLogic
                 }
 
                 return ordersList;
+            }
+
+            return null;
+        }
+
+        public async Task<ViewBillModel> GetBill(long orderId, long userId)
+        {
+            var billDetails = await _user.GetBill(orderId, userId);
+
+            if (billDetails != null)
+            {
+                ViewBillModel viewBill = new ViewBillModel
+                {
+                    OrderId = billDetails.OrderId,
+                    GrandTotal = billDetails.GrandTotal,
+                    OrdereDateAndTime = billDetails.OrdereDateAndTime,
+                    CartId = billDetails.CartId
+                };
+
+                return viewBill;
             }
 
             return null;

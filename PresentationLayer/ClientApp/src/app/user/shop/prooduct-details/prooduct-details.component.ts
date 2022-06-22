@@ -16,15 +16,15 @@ export class ProoductDetailsComponent implements OnInit {
   constructor(private service:UserService, private route:ActivatedRoute, private authService:AuthService) { }
   public itemCounts = 1;
   ngOnInit(): void {
-    this.route.queryParams
-      .subscribe(params=>{
+    this.route.queryParams.subscribe(
+      params=>{
         this.id = params['id'];
-      })
+      }
+    );
 
     this.service.getSelectedProductDetails(this.id).subscribe(
       (productDetails: any) => {
         this.productDetails = productDetails;
-        console.log(this.productDetails);
       }
     )  
     this.loadScript("assets/user/js/jquery-3.3.1.min.js");

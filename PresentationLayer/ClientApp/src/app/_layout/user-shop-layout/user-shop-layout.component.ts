@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartItem } from 'src/app/model/cartItem';
 import { AuthService } from 'src/app/shared/auth/auth.service';
 import { UserService } from 'src/app/shared/user/user.service';
@@ -10,7 +11,7 @@ import { UserService } from 'src/app/shared/user/user.service';
 })
 export class UserShopLayoutComponent implements OnInit {
 
-  constructor(private authService: AuthService, private service: UserService) { }
+  constructor(private authService: AuthService, private service: UserService, private router:Router) { }
 
   nav: any;
   login: string;
@@ -53,7 +54,7 @@ export class UserShopLayoutComponent implements OnInit {
 
   getCartDetails(){
     if(this.authService.customerAuthorization()){
-      this.service.getCartItems().subscribe((data: {}) => {
+      this.service.getCartItems("open").subscribe((data: {}) => {
         this.cartItemsTemp = data;
         // this.cartItemsCount = this.cartItemsTemp.length;
         // console.log(this.cartItemsTemp.length)
@@ -81,6 +82,12 @@ export class UserShopLayoutComponent implements OnInit {
     node.src = url;
     node.type = 'text/javascript';
     document.getElementsByTagName('body')[0].appendChild(node);
+  }
+
+  navigate(url:string){
+    this.router.navigate(
+      [url]
+    );
   }
 
 }

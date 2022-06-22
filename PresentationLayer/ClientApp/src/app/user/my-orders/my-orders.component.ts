@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Order } from 'src/app/model/order';
 import { UserService } from 'src/app/shared/user/user.service';
 
@@ -12,7 +13,7 @@ export class MyOrdersComponent implements OnInit {
   ordersTemp:any;
   orders:any=[];
 
-  constructor(private service: UserService) { }
+  constructor(private service: UserService, private router:Router) { }
 
   ngOnInit(): void {
     this.getOrders();
@@ -39,7 +40,10 @@ export class MyOrdersComponent implements OnInit {
   }
 
   viewBill(orderId:number){
-    
+    this.router.navigate(
+      ['user/view-bill'],
+      {queryParams: {id:orderId}}
+    );
   }
 
   public loadScript(url: string) {

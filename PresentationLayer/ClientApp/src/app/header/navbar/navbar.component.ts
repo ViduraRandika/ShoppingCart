@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Router } from '@angular/router';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -9,7 +10,7 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 })
 export class NavbarComponent implements OnInit {
   faCoffee = faCoffee;
-  constructor() { }
+  constructor(private router:Router) { }
 
   isLoggedin = false;
   
@@ -17,6 +18,12 @@ export class NavbarComponent implements OnInit {
     if(localStorage.getItem("jwt") != null){
       this.isLoggedin = true;
     }
+  }
+
+  navigate(url:string){
+    this.router.navigate(
+      [url]
+    );
   }
 
 }

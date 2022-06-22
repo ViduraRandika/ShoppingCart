@@ -109,7 +109,7 @@ namespace PresentationLayer.API
             var res = userLogic.RemoveProductFromCart(productId, userId);
 
             if (res.Result)
-            {
+            { 
                 return Ok();
             }
 
@@ -119,12 +119,25 @@ namespace PresentationLayer.API
         [Route("getCartItems")]
         [HttpGet]
         [Authorize(Roles = "customer")]
-        public async Task<List<CartItemsViewModel>> GetCartItems()
+        public async Task<List<CartItemsViewModel>> GetCartItems(string status)
         {
             var context = HttpContext;
             var res_u = authLogic.GetUserDataFromToken(context);
             long userID = res_u.UserId;
-            var cartItems= await userLogic.GetCartItems(userID);
+            var cartItems= await userLogic.GetCartItems(userID, status);
+            return cartItems;
+        }
+
+
+        [Route("getCartItemsByCartId/{id}")]
+        [HttpGet]
+        [Authorize(Roles = "customer")]
+        public async Task<List<CartItemsViewModel>> GetCartItemsByCartId(long id)
+        {
+            var context = HttpContext;
+            var res_u = authLogic.GetUserDataFromToken(context);
+            long userID = res_u.UserId;
+            var cartItems = await userLogic.GetCartItemsByCartId(userID, id);
             return cartItems;
         }
 
@@ -173,6 +186,21 @@ namespace PresentationLayer.API
             long userID = res_u.UserId;
             var orders = await userLogic.GetOrderList(userID);
             return orders;
+        }
+
+        [Route("view-bill/{id}")]
+        [HttpGet]
+        [Authorize(Roles = "customer")]
+
+        public async Task<ViewBillModel> GetBill(long id)
+        {
+            var context = HttpContext;
+            var res_u = authLogic.GetUserDataFromToken(context);
+            long userID = res_u.UserId;
+
+            var billDetails = await userLogic.GetBill(id, userID);
+
+            return billDetails;
         }
     }
 }

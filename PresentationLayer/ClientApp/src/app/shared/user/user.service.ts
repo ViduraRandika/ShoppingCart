@@ -59,9 +59,19 @@ export class UserService {
       )
   }
 
-  getCartItems(){
+  getCartItems(status:string){
     return this.http
-      .get(`/api/user/getCartItems`,{responseType:'json'})
+      .get(`/api/user/getCartItems?status=`+status,{responseType:'json'})
+      .pipe(
+        catchError(
+          this.handleError
+        )
+      )
+  }
+  
+  getCartItemsByCartId(cartId:number){
+    return this.http
+      .get(`/api/user/getCartItemsByCartId/${cartId}`,{responseType:'json'})
       .pipe(
         catchError(
           this.handleError
@@ -102,6 +112,16 @@ export class UserService {
   getOrders(){
     return this.http
       .get('/api/user/my-orders',{responseType:'json'})
+      .pipe(
+        catchError(
+          this.handleError
+        )
+      )
+  }
+
+  getBill(id:number){
+    return this.http
+      .get(`/api/user/view-bill/${id}`,{responseType:'json'})
       .pipe(
         catchError(
           this.handleError

@@ -61,13 +61,13 @@
                with font-awesome or any other icon font library -->
             <li class="nav-header">Manage Products</li>
             <li class="nav-item">
-              <a href="admin/add-product" class="nav-link">
+              <a (click)="navigate('admin/add-product')" style="cursor: pointer;" class="nav-link">
                 <i class="nav-icon far fa-calendar-alt"></i>
                 <p>Add Product</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="admin/view-products" class="nav-link">
+              <a (click)="navigate('admin/add-product')" style="cursor: pointer;" class="nav-link">
                 <i class="nav-icon far fa-image"></i>
                 <p>View Products</p>
               </a>
@@ -75,13 +75,13 @@
 
             <li class="nav-header">Manage Categories</li>
             <li class="nav-item">
-              <a href="admin/create-category" class="nav-link">
+              <a (click)="navigate('admin/create-category')" style="cursor: pointer;" class="nav-link">
                 <i class="nav-icon far fa-calendar-alt"></i>
                 <p>Create Category</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="admin/view-categories" class="nav-link">
+              <a (click)="navigate('admin/view-categories')" style="cursor: pointer;" class="nav-link">
                 <i class="nav-icon far fa-image"></i>
                 <p>View Categories</p>
               </a>

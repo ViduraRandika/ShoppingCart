@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartItem } from 'src/app/model/cartItem';
 import { AuthService } from 'src/app/shared/auth/auth.service';
 import { UserService } from 'src/app/shared/user/user.service';
@@ -14,7 +15,7 @@ export class ShoppingCartComponent implements OnInit {
   cartItemsTemp:any;
   cartItems:any= [];
 
-  constructor(private service: UserService) { }
+  constructor(private service: UserService, private router:Router) { }
 
   ngOnInit(): void {
     this.getCartItems();
@@ -31,7 +32,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   getCartItems(){
-    this.service.getCartItems().subscribe((data: {}) => {
+    this.service.getCartItems("open").subscribe((data: {}) => {
       this.cartItemsTemp = data;
       for(var i = 0; i<this.cartItemsTemp.length; i++){
         var temp:CartItem = this.cartItemsTemp[i];
@@ -111,10 +112,11 @@ export class ShoppingCartComponent implements OnInit {
 
       }
     })
+  }
 
-
-
-
-    
+  navigate(url:string){
+    this.router.navigate(
+      [url]
+    );
   }
 }

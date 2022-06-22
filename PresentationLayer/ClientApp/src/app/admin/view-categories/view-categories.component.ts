@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AdminService } from 'src/app/shared/admin/admin.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { AdminService } from 'src/app/shared/admin/admin.service';
 })
 export class ViewCategoriesComponent implements OnInit {
 
-  constructor(public service: AdminService) {
+  constructor(public service: AdminService, private router:Router) {
   }
   data: [];
 
@@ -36,5 +37,11 @@ export class ViewCategoriesComponent implements OnInit {
     node.integrity = "$.widget.bridge('uibutton', $.ui.button)"
     node.type = 'text/javascript';
     document.getElementsByTagName('body')[0].appendChild(node);
+  }
+
+  navigate(url:string){
+    this.router.navigate(
+      [url]
+    );
   }
 }

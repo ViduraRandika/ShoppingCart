@@ -73,4 +73,10 @@ export class LoginComponent implements OnInit {
     }
     )
   }
+
+  navigate(url:string){
+    this.router.navigate(
+      [url]
+    );
+  }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AdminService } from 'src/app/shared/admin/admin.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { AdminService } from 'src/app/shared/admin/admin.service';
 })
 export class ViewProductsComponent implements OnInit {
 
-  constructor(public service: AdminService) { }
+  constructor(public service: AdminService, private router:Router) { }
 
   data: [];
 
@@ -41,4 +42,9 @@ export class ViewProductsComponent implements OnInit {
     document.getElementsByTagName('body')[0].appendChild(node);
   }
 
+  navigate(url:string){
+    this.router.navigate(
+      [url]
+    );
+  }
 }

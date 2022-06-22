@@ -14,25 +14,22 @@
   <div class="humberger__menu__cart">
     <ul>
       <li>
-        <a href="#"><i class="fa fa-heart"></i> <span>1</span></a>
-      </li>
-      <li>
-        <a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a>
+        <a><i class="fa fa-shopping-bag"></i> <span>{{cartItemsCount}}</span></a>
       </li>
     </ul>
     <div class="header__cart__price">item: <span>Rs {{cartTotal}}</span></div>
   </div>
   <div class="humberger__menu__widget">
     <div class="header__top__right__auth">
-      <a href={{login_href}}><i class="fa fa-user"></i>{{login}}</a>
+      <a (click)="navigate(login_href)" style="cursor: pointer;"><i class="fa fa-user"></i>{{login}}</a>
     </div>
   </div>
   <nav class="humberger__menu__nav mobile-menu">
     <ul>
-      <li class="active"><a href="/">Home</a></li>
-      <li><a href="/user/shop">Shop</a></li>
-      <li><a href="/user/my-orders">My Orders</a></li>
-      <li><a href="/user/contact">Contact</a></li>
+      <li><a (click)="navigate('/home')" style="cursor: pointer;">Home</a></li>
+      <li><a (click)="navigate('/user/shop')" style="cursor: pointer;" >Shop</a></li>
+      <li><a (click)="navigate('/user/my-orders')" style="cursor: pointer;">My Orders</a></li>
+      <li><a (click)="navigate('/user/contact')" style="cursor: pointer;">Contact</a></li>
     </ul>
   </nav>
   <div id="mobile-menu-wrap"></div>
@@ -65,7 +62,7 @@
               <a><i class="fa fa-instagram"></i></a>
             </div>
             <div class="header__top__right__auth">
-              <a href={{login_href}}><i class="fa fa-user"></i>{{login}}</a>
+              <a (click)="navigate(login_href)" style="cursor: pointer;"><i class="fa fa-user"></i>{{login}}</a>
             </div>
           </div>
         </div>
@@ -84,10 +81,10 @@
       <div class="col-lg-6">
         <nav class="header__menu">
           <ul>
-            <li><a href="/">Home</a></li>
-            <li class="active"><a href="/user/shop">Shop</a></li>
-            <li class="active"><a href="/user/my-orders">My Orders</a></li>
-            <li><a href="/user/contact">Contact</a></li>
+            <li><a (click)="navigate('/home')" style="cursor: pointer;">Home</a></li>
+            <li><a (click)="navigate('/user/shop')" style="cursor: pointer;">Shop</a></li>
+            <li><a (click)="navigate('/user/my-orders')" style="cursor: pointer;">My Orders</a></li>
+            <li><a (click)="navigate('/user/contact')" style="cursor: pointer;">Contact</a></li>
           </ul>
         </nav>
       </div>
@@ -95,7 +92,7 @@
         <div class="header__cart">
           <ul>
             <li>
-              <a href="/user/shop/shopping-cart"><i class="fa fa-shopping-bag"></i> <span>{{cartItemsCount}}</span></a>
+              <a (click)="navigate('/user/shop/shopping-cart')" style="cursor: pointer;"><i class="fa fa-shopping-bag"></i> <span>{{cartItemsCount}}</span></a>
             </li>
           </ul>
           <div class="header__cart__price">item: <span>Rs {{cartTotal}}</span></div>
@@ -134,9 +131,9 @@
         <div class="footer__widget">
           <h6>Useful Links</h6>
           <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/user/shop">Shop</a></li>
-            <li><a href="/user/contact">Contact Us</a></li>
+            <li><a (click)="navigate('/')" style="cursor: pointer;">Home</a></li>
+            <li><a (click)="navigate('/user/shop')" style="cursor: pointer;">Shop</a></li>
+            <li><a (click)="navigate('/user/contact')" style="cursor: pointer;">Contact Us</a></li>
           </ul>
         </div>
       </div>

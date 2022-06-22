@@ -62,7 +62,7 @@ namespace LogicLayer.AuthLogic
                     new Claim(ClaimTypes.MobilePhone, user.UserPhoneNumber),
                     new Claim(ClaimTypes.Role, authLevel)
                 },
-                expires: DateTime.UtcNow.AddHours(3),
+                expires: DateTime.UtcNow.AddHours(24),
                 signingCredentials: new SigningCredentials(
                     key: new SymmetricSecurityKey(tokenKey),
                     algorithm: SecurityAlgorithms.HmacSha256
